@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdou <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:46:47 by aabdou            #+#    #+#             */
-/*   Updated: 2021/12/01 20:46:49 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:32:31 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	ft_strlcpy(s3, s1, ft_strlen(s1) + 1);
 	ft_strlcat(s3, s2, len);
+	free((void *)s1);
 	return (s3);
 }

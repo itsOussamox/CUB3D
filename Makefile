@@ -3,10 +3,17 @@ NAME = cub3D
 CC = cc
 
 FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#FLAGS = -g -Wall -Wextra -Werror
 
 RM = rm -f
 
 SRCS =	main.c\
+		./src/parsing/arg_parsing.c\
+		./utils/GetNextLine/get_next_line_utils.c\
+		./utils/GetNextLine/get_next_line.c\
+		./src/parsing/map_parsing.c\
+		./src/parsing/free.c\
+		./src/parsing/utils.c
 
 LIB =	./includes/parsing.h
 
@@ -15,9 +22,9 @@ OBJT = $(SRCS:.c=.o)
 
 
 $(NAME): $(OBJT) LIBFT
-	$(CC) $(OBJT) $(FLAGS) ./utils/libft/libft.a -o $(NAME)
+	$(CC) $(FLAGS) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
 
-%.o : %.cpp $(LIB)
+%.o : %.c $(LIB)
 	$(CC) $(FLAGS) -o $@ -c $<
 
 all : $(NAME)

@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/01 19:20:04 by aabdou           ###   ########.fr       */
+/*   Created: 2022/08/01 17:09:49 by aabdou            #+#    #+#             */
+/*   Updated: 2022/08/01 17:11:10 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/parsing.h"
+#include "../../includes/parsing.h"
 
-int main(int ac, char **av)
+void	free_2D(char **var)
 {
-	int file_distiptor;
-	t_map_requirements var;
+	int	i;
 
-	check_argument(ac, av, &file_distiptor);
-	innit_map_rec(&var);
-	var.map = fill_map(file_distiptor);
-	if (var.map != NULL)
+	i = 0;
+	while(var[i] != NULL)
 	{
-		check_map_requirements(&var);
+		free(var[i]);
+		i++;
 	}
-
-
-	return 0;
+	free(var);
 }
-
