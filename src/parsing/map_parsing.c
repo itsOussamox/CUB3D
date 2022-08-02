@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 11:54:38 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/02 13:55:17 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,21 @@ char **fill_map(int file_dicriptor)
 
 void	check_directions(t_map_requirements **var)
 {
-	int i = 0;
+	int i;
+	
+	i = 0;
 	while(i < 6)
 	{
-		if (remove_space_and_tabs(&var, i) == -1)
+		if (get_file_path(&var, i) == -1)
 		{
-			ft_putendl_fd("Error: wrong map parameters!", 2);
-			free((*var)->map);
+			ft_putendl_fd("Error: wrong wall parameters!", 2);
+			free_2D((*var)->map);
+			exit(EXIT_FAILURE);
+		}
+		if (get_rgb(&var, i) == -1)
+		{
+			free_filePath(&var);
+			free_2D((*var)->map);
 			exit(EXIT_FAILURE);
 		}
 		i++;

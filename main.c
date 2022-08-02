@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 11:52:56 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/02 13:04:36 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main(int ac, char **av)
 	{
 		check_map_requirements(&var);
 		printf("%s\n%s\n%s\n%s\n", var.WE, var.EA, var.NO, var.SO);
-		printf("\n%s\n%s\n", var.F, var.C);
 	}
 
 

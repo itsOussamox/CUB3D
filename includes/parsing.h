@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 11:49:50 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/02 13:54:50 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,16 @@
 #include "../utils/libft/libft.h"
 #include "../utils/GetNextLine/get_next_line.h"
 
-typedef struct rgb
-{
-	int C[3];
-	int F[3];
-}				t_colors;
-
-
-
-
 typedef struct	content
 {
 	char* NO;
 	char* SO;
 	char* WE;
 	char* EA;
-	char* F;
-	char* C;
+	int F;
+	int C;
 	char **map;
-	t_colors	rgb;
 }				t_map_requirements;
-
-
-
 
 // argument parsing
 
@@ -57,15 +44,16 @@ void	check_directions(t_map_requirements **var);
 // utils
 
 void	free_2D(char **var);
-int		remove_space_and_tabs(t_map_requirements ***var, int flag);
+void	free_filePath(t_map_requirements ***var);
+int		get_file_path(t_map_requirements ***var, int flag);
 
 
 
 //// new split
 char	**clear_tabs_and_spaces(char *str, char *charset);
-// int	char_is_separator(char c, char *charset);
-// int	count_words(char *str, char *charset);
-// void	write_word(char *dest, char *from, char *charset);
-// void	write_split(char **split, char *str, char *charset);
+int	char_is_separator(char c, char *charset);
+int	count_words(char *str, char *charset);
+void	write_word(char *dest, char *from, char *charset);
+void	write_split(char **split, char *str, char *charset);
 
 #endif
