@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 13:55:17 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/02 19:34:53 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	innit_map_rec(t_map_requirements *var)
 {
-	var->NO = 0;
-	var->SO = 0;
-	var->WE = 0;
-	var->EA = 0;
-	var->F = 0;
-	var->C = 0;
+	var->NO = NULL;
+	var->SO = NULL;
+	var->WE = NULL;
+	var->EA = NULL;
+	var->F = -1;
+	var->C = -1;
 	return;
 }
 
@@ -51,25 +51,33 @@ char **fill_map(int file_dicriptor)
 	return (res);
 }
 
-
-
 void	check_directions(t_map_requirements **var)
 {
 	int i;
-	
+	int nb;
+
+	nb = 0;
+	i = 0;
+	while(i < 6)
+	{
+		if ((get_rgb(&var, i, &nb) == -1) || nb > 2)
+		{
+			printf("oy\n");
+			ft_putendl_fd("Error: wrong game parameters!", 2);
+			free_2D((*var)->map);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
 	i = 0;
 	while(i < 6)
 	{
 		if (get_file_path(&var, i) == -1)
 		{
-			ft_putendl_fd("Error: wrong wall parameters!", 2);
+			printf("yo\n");
+			ft_putendl_fd("Error: wrong game parameters!", 2);
 			free_2D((*var)->map);
-			exit(EXIT_FAILURE);
-		}
-		if (get_rgb(&var, i) == -1)
-		{
 			free_filePath(&var);
-			free_2D((*var)->map);
 			exit(EXIT_FAILURE);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 13:54:50 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/02 14:44:53 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	check_directions(t_map_requirements **var);
 void	free_2D(char **var);
 void	free_filePath(t_map_requirements ***var);
 int		get_file_path(t_map_requirements ***var, int flag);
+int		get_rgb(t_map_requirements ***var, int flag, int *nb);
 
 
 
