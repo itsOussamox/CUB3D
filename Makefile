@@ -13,7 +13,8 @@ SRCS =	main.c\
 		./utils/GetNextLine/get_next_line.c\
 		./src/parsing/map_parsing.c\
 		./src/parsing/free.c\
-		./src/parsing/utils.c
+		./src/parsing/utils.c\
+		./src/parsing/new_split.c
 
 LIB =	./includes/parsing.h
 

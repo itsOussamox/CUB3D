@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/01 19:19:51 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/02 11:49:50 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,18 @@ typedef struct rgb
 }				t_colors;
 
 
-typedef struct values
-{
-	char *NO;
-	char *SO;
-	char *WE;
-	char *EA;
-}				t_values;
 
 
 typedef struct	content
 {
-	int NO;
-	int SO;
-	int WE;
-	int EA;
-	int F;
-	int C;
+	char* NO;
+	char* SO;
+	char* WE;
+	char* EA;
+	char* F;
+	char* C;
 	char **map;
 	t_colors	rgb;
-	t_values	file_path;
 }				t_map_requirements;
 
 
@@ -65,7 +57,15 @@ void	check_directions(t_map_requirements **var);
 // utils
 
 void	free_2D(char **var);
-void	remove_space_and_tabs(char *str, char **path, char **name);
+int		remove_space_and_tabs(t_map_requirements ***var, int flag);
 
+
+
+//// new split
+char	**clear_tabs_and_spaces(char *str, char *charset);
+// int	char_is_separator(char c, char *charset);
+// int	count_words(char *str, char *charset);
+// void	write_word(char *dest, char *from, char *charset);
+// void	write_split(char **split, char *str, char *charset);
 
 #endif
