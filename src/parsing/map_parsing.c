@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 19:34:53 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/03 17:51:55 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,42 +51,30 @@ char **fill_map(int file_dicriptor)
 	return (res);
 }
 
-void	check_directions(t_map_requirements **var)
+int	check_for_error(t_map_requirements **var)
 {
 	int i;
-	int nb;
+	char **tab;
+	int return_value;
 
-	nb = 0;
 	i = 0;
-	while(i < 6)
+	while((*var)->map[i])
 	{
-		if ((get_rgb(&var, i, &nb) == -1) || nb > 2)
-		{
-			printf("oy\n");
-			ft_putendl_fd("Error: wrong game parameters!", 2);
-			free_2D((*var)->map);
-			exit(EXIT_FAILURE);
-		}
+		tab = clear_tabs_and_spaces((*var)->map[i], " \t");
+		return_value = check_tab((*var), tab, i);
+		if (return_value == 2)
+			continue;
+		else if (return_value == 3)
+			break;
+		else if (return_value == 1)
+			return (1);
 		i++;
 	}
-	i = 0;
-	while(i < 6)
-	{
-		if (get_file_path(&var, i) == -1)
-		{
-			printf("yo\n");
-			ft_putendl_fd("Error: wrong game parameters!", 2);
-			free_2D((*var)->map);
-			free_filePath(&var);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
-		return;
+	return 0;
 }
 
 void	check_map_requirements(t_map_requirements *var)
 {
-	check_directions(&var);
+	check_for_error(&var);
 	return;
 }
