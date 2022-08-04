@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/03 17:51:55 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/04 18:19:24 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ char **fill_map(int file_dicriptor)
 		free(line);
 	}
 	free(line);
-	close(file_dicriptor);
 	if (all_lines[0] == '\0')
 	{
-		ft_putendl_fd("Error: didnt read map!", 2);
+		ft_putendl_fd("Error:\ndidnt read map!", 2);
 		exit(EXIT_FAILURE);
 	}
 	res = ft_split(all_lines, '\n');
@@ -67,10 +66,13 @@ int	check_for_error(t_map_requirements **var)
 		else if (return_value == 3)
 			break;
 		else if (return_value == 1)
-			return (1);
+			return (free_filePath((*var)), free_2D(tab), 1);
 		i++;
 	}
-	return 0;
+	if ((*var)->F == -1 || (*var)->C == -1 || (*var)->EA == NULL
+		|| (*var)->NO == NULL || (*var)->SO == NULL || (*var)->WE == NULL)
+			return(free_filePath((*var)), free_2D(tab) , ft_putendl_fd("Error:\nmissing parameter", 2), 1);
+	return (free_2D(tab), 0);
 }
 
 void	check_map_requirements(t_map_requirements *var)

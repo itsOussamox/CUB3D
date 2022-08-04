@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/03 17:39:14 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/04 17:58:28 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		fill_texture(t_map_requirements *var, char **tab);
 // utils
 
 void	free_2D(char **var);
-void	free_filePath(t_map_requirements ***var);
+void	free_filePath(t_map_requirements *var);
 
 
 

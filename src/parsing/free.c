@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:09:49 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 13:51:01 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/04 17:58:24 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	free_2D(char **var)
 	free(var);
 }
 
-void	free_filePath(t_map_requirements ***var)
+void	free_filePath(t_map_requirements *var)
 {
-	free((*(*var))->EA);
-	free((*(*var))->SO);
-	free((*(*var))->NO);
-	free((*(*var))->WE);
+	free(var->EA);
+	free(var->SO);
+	free(var->NO);
+	free(var->WE);
+	return;
 }
