@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/04 18:19:24 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/05 16:19:03 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	check_for_error(t_map_requirements **var)
 	}
 	if ((*var)->F == -1 || (*var)->C == -1 || (*var)->EA == NULL
 		|| (*var)->NO == NULL || (*var)->SO == NULL || (*var)->WE == NULL)
-			return(free_filePath((*var)), free_2D(tab) , ft_putendl_fd("Error:\nmissing parameter", 2), 1);
-	return (free_2D(tab), 0);
+			return(free_filePath((*var)), free_2D(tab),ft_putendl_fd("Error:\nmissing parameter", 2), 1);
+	return (free_2D(tab),0);
 }
 
 void	check_map_requirements(t_map_requirements *var)
