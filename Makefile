@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -g -Wall -Wextra -Werror 
+FLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 
 RM = rm -f
 
