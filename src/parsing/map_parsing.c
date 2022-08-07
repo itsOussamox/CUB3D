@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/06 19:54:21 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 12:03:55 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,18 +190,41 @@ int	check_first_and_last_elem(t_map_requirements *var)
 
 }
 
+size_t	ft_strlen2(const char *str)
+{
+	size_t	i;
+	size_t	count;
+
+	count = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if(str[i] == '\t')
+			count += 4;
+		else
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int	check_if_valid_placement(char **map, int i, int j)
 {
 	if (map[i][j - 1] == ' ' || map[i][j - 1] == '\t'
 	|| map[i][j + 1] == ' ' || map[i][j + 1] == '\t')
-		return (printf("this return"), 1);
-	// if ((int)ft_strlen(map[i - 1]) <= j || (int)ft_strlen(map[i + 1]) <= j)
-		// return (printf("this return2"), 1);
-	else if (map[i - 1][j] == ' ' || map[i - 1][j] == '\t'
-	|| map[i + 1][j] == ' ' || map[i + 1][j] == '\t')
-		return (printf("this return3"), 1);
+		return (1);
+	else if (map[i + 1] != NULL)
+	{
+		if ((int)ft_strlen2(map[i - 1]) <= j || (int)ft_strlen2(map[i + 1]) <= j)
+			return (1);
+		else if (map[i - 1][j] == ' ' || map[i - 1][j] == '\t'
+		|| map[i + 1][j] == ' ' || map[i + 1][j] == '\t')
+		return (1);
+	}
 	return (0);
 }
+
+
 
 int	check_middle_lines(t_map_requirements *var)
 {
@@ -209,15 +232,17 @@ int	check_middle_lines(t_map_requirements *var)
 	int	j;
 
 	i = 6;
-	printf( "%s\n", var->map[i]);
 	while (var->map[i] != NULL)
 	{
 		j = 0;
 		while (var->map[i][j] != '\0')
 		{
-			if (var->map[i][j] != '1' && var->map[i][j] != ' '
-				&& var->map[i][j] != '\t' && check_if_valid_placement(var->map, i, j))
-					return (printf("i = %d , j = %d  map = %s\n", i, j, var->map[i]), 1);
+			if (var->map[i + 1] != NULL)
+			{
+				if (var->map[i][j] != '1' && var->map[i][j] != ' '
+					&& var->map[i][j] != '\t' && check_if_valid_placement(var->map, i, j))
+						return (1);
+			}
 			j++;
 		}
 		i++;
@@ -229,13 +254,11 @@ int	check_middle_lines(t_map_requirements *var)
 int	check_MapElm_for_error(t_map_requirements **var)
 {
 	if (check_map_chars((*var)->map, (*var)) == 1)
-		return (printf("here1\n"),1);
-	if (check_top_and_bottom_wall((*var)) == 1)
-		return(printf("here2\n"), 1);
-	if (check_first_and_last_elem((*var)) == 1)
-		return (printf("here3\n"), 1);
+		return (1);
+	if (check_top_and_bottom_wall((*var)) == 1 || check_first_and_last_elem((*var)) == 1)
+		return(ft_putendl_fd("Error:\ninvalid wall!", 2), 1);
 	if (check_middle_lines((*var)) == 1)
-		return (printf("here4\n"), 1);
+		return (ft_putendl_fd("Error:\ninvalid map!", 2), 1);
 	return (0);
 }
 
@@ -244,9 +267,6 @@ void	check_file_requirements(t_map_requirements *var)
 	if (check_NonMapElm_for_error(&var) == 1)
 		exit(EXIT_FAILURE);
 	if (check_MapElm_for_error(&var) == 1)
-	{
-		ft_putendl_fd("Error:\nwrong map parameter", 2);
 		exit(EXIT_FAILURE);
-	}
 	return;
 }
