@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/07 12:48:18 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 17:00:50 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_argument(int ac, char **av, int *fd);
 
 void	innit_map_rec(t_map_requirements *var);
 char	**fill_map(int file_dicriptor);
-void	check_file_requirements(t_map_requirements *var);
+int		check_file_requirements(t_map_requirements *var);
 int		check_NonMapElm_for_error(t_map_requirements **var);
 int		check_tab(t_map_requirements *var, char **tab, int index);
 int		check_color(t_map_requirements **var, char landscape, int index);

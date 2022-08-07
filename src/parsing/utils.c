@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:47:10 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/07 12:42:37 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 17:05:11 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ int	fill_texture(t_map_requirements *var, char **tab)
 }
 
 
-void	check_file_requirements(t_map_requirements *var)
+int	check_file_requirements(t_map_requirements *var)
 {
+	if (var->map[6] == NULL)
+		return (ft_putendl_fd("Error:\nno map!", 2), 1);
 	if (check_NonMapElm_for_error(&var) == 1)
 		exit(EXIT_FAILURE);
 	if (check_MapElm_for_error(&var) == 1)
 		exit(EXIT_FAILURE);
-	return;
+	return 0;
 }

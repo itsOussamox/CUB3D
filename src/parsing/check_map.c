@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:29:18 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/07 14:12:55 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 17:36:17 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int	check_if_valid_placement(char **map, int i, int j)
 	if (map[i][j - 1] == ' ' || map[i][j - 1] == '\t'
 	|| map[i][j + 1] == ' ' || map[i][j + 1] == '\t')
 		return (1);
-	if ((int)ft_strlen2(map[i - 1]) <= j || (int)ft_strlen2(map[i + 1]) <= j)
+	if ((int)ft_strlen(map[i - 1]) <= j || (int)ft_strlen(map[i + 1]) <= j)
 		return (1);
-	else if (ft_strlen2(map[i + 1]) > ft_strlen2(map[i]) && (map[i - 1][j] == ' ' || map[i - 1][j] == '\t'
-	|| map[i + 1][j] == ' ' || map[i + 1][j] == '\t'))
+	else if (map[i - 1][j] == ' ' || map[i - 1][j] == '\t'
+	|| map[i + 1][j] == ' ' || map[i + 1][j] == '\t')
 		return (1);
 	return (0);
 }
@@ -100,7 +100,7 @@ int	check_middle_lines(t_map_requirements *var)
 			{
 				if (var->map[i][j] != '1' && var->map[i][j] != ' '
 					&& var->map[i][j] != '\t' && check_if_valid_placement(var->map, i, j))
-						return (printf("i = %d, j = %d, char = %c, string = %s\n", i,j, var->map[i][j], var->map[i]),1);
+						return (1);
 			}
 			j++;
 		}
