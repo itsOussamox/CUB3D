@@ -6,29 +6,11 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/07 17:02:08 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 19:16:35 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/parsing.h"
-
-size_t	ft_strlen2(const char *str)
-{
-	size_t	i;
-	size_t	count;
-
-	count = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\t')
-			count += 4;
-		else
-			count++;
-		i++;
-	}
-	return (count);
-}
 
 void	innit_map_rec(t_map_requirements *var)
 {
@@ -66,8 +48,6 @@ int main(int ac, char **av)
 		free_filePath(&var);
 		free_2D(var.map);
 	}
-
-
 	return 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/07 17:00:50 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 19:16:43 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int		check_NonMapElm_for_error(t_map_requirements **var);
 
 void	free_2D(char **var);
 void	free_filePath(t_map_requirements *var);
-size_t	ft_strlen2(const char *str);
-
 
 
 //// new split
