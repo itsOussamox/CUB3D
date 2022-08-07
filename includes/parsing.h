@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/06 18:28:45 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/07 12:48:18 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,22 @@ int 	check_color_args(char **tab);
 int 	check_color_args2(char **tab);
 int		check_texture(t_map_requirements *var, char **tab);
 int		fill_texture(t_map_requirements *var, char **tab);
+int		check_middle_lines(t_map_requirements *var);
+int		check_if_valid_placement(char **map, int i, int j);
+int		check_right_most_elem(char **map);
+int		check_left_most_elem(char **map);
+int		check_top_and_bottom_wall(t_map_requirements *var);
+int		check_MapElm_for_error(t_map_requirements **var);
+int		check_first_and_last_elem(t_map_requirements *var);
+int		check_map_chars(char **map, t_map_requirements *var);
+int		log_player_data(char c, t_map_requirements *var, int i, int j);
+int		check_NonMapElm_for_error(t_map_requirements **var);
 
 // utils
 
 void	free_2D(char **var);
 void	free_filePath(t_map_requirements *var);
-
+size_t	ft_strlen2(const char *str);
 
 
 

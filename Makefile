@@ -13,7 +13,9 @@ SRCS =	main.c\
 		./src/parsing/map_parsing.c\
 		./src/parsing/free.c\
 		./src/parsing/utils.c\
-		./src/parsing/new_split.c
+		./src/parsing/new_split.c\
+		./src/parsing/check_map.c\
+		./src/parsing/check_color.c
 
 LIB =	./includes/parsing.h
 
