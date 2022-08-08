@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:29:18 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/07 17:36:17 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/08 13:52:29 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 int	check_top_and_bottom_wall(t_map_requirements *var)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (var->map[6][j])
 	{
-		if (var->map[6][j] != '1' && var->map[6][j] != '\t' && var->map[6][j] != ' ')
+		if (var->map[6][j] != '1' && var->map[6][j] != '\t'
+			&& var->map[6][j] != ' ')
 			return (1);
 		j++;
 	}
 	j = 0;
-	while(var->map[var->height + 5][j])
+	while (var->map[var->height + 5][j])
 	{
 		if (var->map[var->height + 5][j] != '1' && var->map[var->height + 5][j]
 			!= ' ' && var->map[var->height + 5][j] != '\t')
@@ -37,7 +38,7 @@ int	check_top_and_bottom_wall(t_map_requirements *var)
 int	check_left_most_elem(char **map)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 6;
 	while (map[i] && map[i][0])
@@ -50,13 +51,12 @@ int	check_left_most_elem(char **map)
 		i++;
 	}
 	return (0);
-
 }
 
 int	check_right_most_elem(char **map)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 6;
 	while (map[i] && map[i][ft_strlen(map[i]) - 1])
@@ -69,7 +69,6 @@ int	check_right_most_elem(char **map)
 		i++;
 	}
 	return (0);
-
 }
 
 int	check_if_valid_placement(char **map, int i, int j)
@@ -99,8 +98,9 @@ int	check_middle_lines(t_map_requirements *var)
 			if (var->map[i + 1] != NULL)
 			{
 				if (var->map[i][j] != '1' && var->map[i][j] != ' '
-					&& var->map[i][j] != '\t' && check_if_valid_placement(var->map, i, j))
-						return (1);
+					&& var->map[i][j] != '\t'
+					&& check_if_valid_placement(var->map, i, j))
+					return (1);
 			}
 			j++;
 		}

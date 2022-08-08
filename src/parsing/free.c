@@ -6,18 +6,18 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:09:49 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/04 17:58:24 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/08 14:02:50 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
-void	free_2D(char **var)
+void	free_2d(char **var)
 {
 	int	i;
 
 	i = 0;
-	while(var[i] != NULL)
+	while (var[i] != NULL)
 	{
 		free(var[i]);
 		i++;
@@ -25,11 +25,11 @@ void	free_2D(char **var)
 	free(var);
 }
 
-void	free_filePath(t_map_requirements *var)
+void	free_file_path(t_map_requirements *var)
 {
-	free(var->EA);
-	free(var->SO);
-	free(var->NO);
-	free(var->WE);
-	return;
+	free(var->ea);
+	free(var->so);
+	free(var->no);
+	free(var->we);
+	return ;
 }

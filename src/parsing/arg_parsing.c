@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:53:27 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/04 17:40:22 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/08 13:54:26 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	open_file(int *fd, char *file_name)
 		ft_putendl_fd("Error:\ncant open file!", 2);
 		exit(EXIT_FAILURE);
 	}
-	return;
+	return ;
 }
 
 void	check_file_type(char *path, char *ext)
@@ -35,7 +35,7 @@ void	check_file_type(char *path, char *ext)
 		ft_putendl_fd("Error:\nWrong file type!", 2);
 		exit(EXIT_FAILURE);
 	}
-	while(dot_pos[i] != '\0')
+	while (dot_pos[i] != '\0')
 	{
 		if (dot_pos[i] != ext[i])
 		{
@@ -44,17 +44,17 @@ void	check_file_type(char *path, char *ext)
 		}
 		i++;
 	}
-	return;
+	return ;
 }
 
 void	check_argument(int ac, char **av, int *fd)
 {
-	if (ac != 2 )
+	if (ac != 2)
 	{
 		ft_putendl_fd("Error:\nwrong number of arguments!", 2);
 		exit(EXIT_FAILURE);
 	}
 	check_file_type(av[1], ".cub");
 	open_file(fd, av[1]);
-	return;
+	return ;
 }
