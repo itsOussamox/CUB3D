@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/08 14:09:04 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/08 22:43:24 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/parsing.h"
+#include "./includes/cubed.h"
 
 void	innit_map_rec(t_map_requirements *var)
 {
@@ -31,6 +32,7 @@ int	main(int ac, char **av)
 {
 	int					file_distiptor;
 	t_map_requirements	var;
+    t_data	data;
 
 	check_argument(ac, av, &file_distiptor);
 	innit_map_rec(&var);
@@ -45,8 +47,7 @@ int	main(int ac, char **av)
 		printf("%d, %d \n", var.c, var.f);
 		printf("height: %d\n", var.height);
 		printf("player y = %d\nplayer x = %d\nplayer direction = %c\n", var.y_player, var.x_player, var.player_orientaition);
-		free_file_path(&var);
-		free_2d(var.map);
 	}
+	rendering(&data, &var);
 	return (0);
 }
