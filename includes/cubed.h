@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 21:57:27 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:51:19 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@
 #define LEFT 123
 #define	M 46
 
+// Mouse data
+typedef struct s_mouse
+{
+	int	mid_x;
+	int	mid_y;
+	int	x;
+	int	y;
+}	t_mouse;
+
+// Rect data
 typedef struct s_rect
 {
 	int	x;
@@ -101,11 +111,12 @@ typedef struct s_player
 typedef struct s_data
 {
 	t_map_requirements	*var;
-	double				scale;
 	t_player			player;
 	t_img				img;
 	t_ray				ray;
 	t_rays				*rays;
+	t_mouse				mouse;
+	double				scale;
 	int					minisize;
 	int					numofrays;
 	int					alpha;
