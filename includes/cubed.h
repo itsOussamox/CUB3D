@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 19:20:39 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:57:27 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_player
 	double		y;
 	int		move_dir;
 	int		turn_dir;
+	int		strafe_dir;
 	double	pa;
 }	t_player;
 
@@ -142,6 +143,7 @@ void	rendering(t_data *data, t_map_requirements *var);
 int		get_floor(double x, t_data data);
 int		is_player(char c);
 int		end_game(t_data *data);
+int		get_wall_color(t_data *data, int i);
 
 
 /* Ray Casting */

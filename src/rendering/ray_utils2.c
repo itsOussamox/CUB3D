@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:31:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:32:07 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:59:01 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ double	get_wall_distance(t_data *data, char sym)
 	x2 = data->ray.horzwallhitx;
 	y2 = data->ray.horzwallhity;
 	if (sym == 'V')
+	{
 		x2 = data->ray.vertwallhitx;
 		y2 = data->ray.vertwallhity;
-	// distance = sqrt( (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) );
+	}
 	distance = hypot(x2 - x1, y2 - y1);
 	return (distance);
 }

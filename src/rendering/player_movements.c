@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 19:33:10 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:02:23 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ double	player_move(t_data *data)
         return (1);
     newx = data->player.x + (cos(data->player.pa) * PLAYER_SPEED) * data->player.move_dir;
     newy = data->player.y + (sin(data->player.pa) * PLAYER_SPEED) * data->player.move_dir;
+	// newx = get_strafe_x();
+	// newy = get_strafe_y(data);
     y = floor(newy) / data->minisize;
     x = floor(newx) / data->minisize;
     if (data->map[y][x] >= '1' && ft_isdigit(data->map[y][x]))
@@ -49,6 +51,10 @@ int key_release(int key, t_data *data)
 		data->player.move_dir = 0;
 	if (key == S)
 		data->player.move_dir = 0;
+	if (key == A)
+		data->player.strafe_dir = 0;
+	if (key == D)
+		data->player.strafe_dir = 0;
 	if (key == LEFT)
 		data->player.turn_dir = 0;
 	if (key == RIGHT)
@@ -62,6 +68,10 @@ int key_press(int key, t_data *data)
 		data->player.move_dir = 1;
 	if (key == S)
 		data->player.move_dir = -1;
+	if (key == A)
+		data->player.strafe_dir = -1;
+	if (key == D)
+		data->player.strafe_dir = -1;
 	if (key == LEFT)
 		data->player.turn_dir = -1;
 	if (key == RIGHT)

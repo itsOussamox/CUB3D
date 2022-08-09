@@ -6,11 +6,27 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:33:35 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 18:54:44 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:10:22 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
+
+int	get_wall_color(t_data *data, int i)
+{
+	if (data->rays[i].angle > M_PI && data->rays[i].sym == 'H')
+		return (0xffe800);
+	if (data->rays[i].angle < M_PI && data->rays[i].sym == 'H')
+		return (0x482b7d);
+	if ((data->rays[i].angle > M_PI / 2  &&
+		data->rays[i].angle < M_PI + M_PI / 2) && data->rays[i].sym == 'V')
+		return (0xff3eeb);
+	if ((data->rays[i].angle < M_PI / 2 || 
+		data->rays[i].angle > M_PI + M_PI / 2) && data->rays[i].sym == 'V')
+		return (0x55ff55);
+		printf("cant find");
+	return (0x330906);
+}
 
 void	set_wall_hit(t_data *data, double x, double y, char sym)
 {
@@ -52,7 +68,6 @@ void	draw_map(t_data *data)
 void	render_2d(t_data *data)
 {
 	data->minisize = floor(TILE_SIZE * data->scale);
-	// ft_background_fill(data, data->minisize, 0x000000);
 	draw_map(data);
 	put_player(data);
 	render_rays(data);

@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 18:27:06 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 22:14:34 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,10 @@ void	render_3d(t_data *data)
 		data->alpha = raydistance / 10;
 		if (data->alpha > 100)
 			data->alpha = 100;
-		draw_wall(data, rect, 0xb4b4b4);
+		draw_wall(data, rect, get_wall_color(data, i));
 		draw_bot(data, rect);
 		data->alpha = 0;
 		i++;
 	}
-	// int	line_height;
-	// int	draw_start;
-	// int	draw_end;
-	// t_rect	rect;
-	// // printf("numofrays = [%d]\n", data->numofrays);
-	// while (i < data->numofrays)
-	// {
-	// 	line_height = (int)(data->window_height / data->rays_distance[i]);
-	// 	draw_start = -line_height / 2 + data->window_height / 2;
-	// 	if (draw_start < 0)
-	// 		draw_start = 0;
-	// 	draw_end = line_height / 2 + data->window_height / 2;
-	// 	if (draw_end >= data->window_height)
-	// 		draw_end = data->window_height - 1;
-	// 	rect =s get_rect(i, draw_start, i, draw_end);
-	// 	draw_wall(data, rect, 0xFFFFFF);
-	// 	i++;
-	// }
 	mlx_put_image_to_window(data->mlx, data->win, data->img.addr, 0, 0);
 } 
