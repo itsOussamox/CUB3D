@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 20:48:07 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:38:04 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	render_rays(t_data *data)
 	i = 0;
 	while (i < data->numofrays)
 	{
-		draw_line(data, (data->player.x * SCALE), (data->player.y * SCALE),
-			(data->rays[i].wallhitx * SCALE),
-			(data->rays[i].wallhity * SCALE));
+		draw_line(data, (data->player.x * data->scale), (data->player.y * data->scale),
+			(data->rays[i].wallhitx * data->scale),
+			(data->rays[i].wallhity * data->scale));
 		i++;
 	}
 }
@@ -35,17 +35,24 @@ void	render_3d(t_data *data)
 	t_rect	rect;
 
 	i = 0 ;
-	ft_background_fill(data, TILE_SIZE, 0x212121);
+	// ft_background_fill(data, data->minisize, 0x212121);
+	mlx_clear_window(data->mlx, data->win);
 	while (i < data->numofrays)
 	{
-		raydistance = data->rays[i].distance;
-		distance_pp = ((double)data->window_width / 2) / fabs(tan(FOV_ANGLE / 2));
-		wallstrip_height = ((double)TILE_SIZE / raydistance) * distance_pp;
+		raydistance = data->rays[i].distance * cos(data->rays[i].angle - data->player.pa);
+		distance_pp = (data->window_width / 2) / fabs(tan(FOV_ANGLE / 2));
+		wallstrip_height = (TILE_SIZE / raydistance) * distance_pp;
 		if (wallstrip_height > data->window_height)
 			wallstrip_height = data->window_height - 1;
 		rect = get_rect(i * WSTRIP, (data->window_height / 2)
 		 - (wallstrip_height / 2), WSTRIP, wallstrip_height);
-		draw_wall(data, rect, 0xFFFFFF);
+		draw_top(data, rect);
+		data->alpha = raydistance / 10;
+		if (data->alpha > 100)
+			data->alpha = 100;
+		draw_wall(data, rect, 0xb4b4b4);
+		data->alpha = 0;
+		draw_bot(data, rect);
 		i++;
 	}
 	// int	line_height;
@@ -62,7 +69,7 @@ void	render_3d(t_data *data)
 	// 	draw_end = line_height / 2 + data->window_height / 2;
 	// 	if (draw_end >= data->window_height)
 	// 		draw_end = data->window_height - 1;
-	// 	rect = get_rect(i, draw_start, i, draw_end);
+	// 	rect =s get_rect(i, draw_start, i, draw_end);
 	// 	draw_wall(data, rect, 0xFFFFFF);
 	// 	i++;
 	// }

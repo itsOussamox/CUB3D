@@ -6,13 +6,13 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 23:32:59 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:42:00 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBED_H
 #define CUBED_H
-#include <mlx.h>
+#include "../mlx/mlx.h"
 #include "parsing.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,7 @@
 #define GROUND_COLOR 0x808080
 #define WALL_COLOR 0xb1b1b1
 /* WINDOW SETTINGS */
-#define TILE_SIZE 32
+#define TILE_SIZE 128
 #define FOV 60
 #define FOV_ANGLE FOV * (M_PI / 180)
 #define WSTRIP 1
@@ -41,8 +41,10 @@
 #define S 1
 #define A 0
 #define D 2
+#define ESCAPE 53
 #define RIGHT 124
 #define LEFT 123
+#define	M 46
 
 typedef struct s_rect
 {
@@ -71,12 +73,14 @@ typedef struct s_rays
 	double	distance;
 	double	wallhitx;
 	double	wallhity;
+	char	sym;
+	double	angle;
 }	t_rays;
 // Image to draw on
 typedef struct s_img
 {
 	void	*mlx_img;
-	char	*addr;
+	int		*addr;
 	int		bpp;
 	int		line_len;
 	int		endian;
@@ -90,27 +94,29 @@ typedef struct s_player
 	int		move_dir;
 	int		turn_dir;
 	double	pa;
-	char	pos;
-	int		sym;
 }	t_player;
 
 // mlx and map's data
 typedef struct s_data
 {
-	t_player	player;
-	t_img		img;
-	t_ray		ray;
-	double		*rays_distance;
-	t_rays		*rays;
-	int			minisize;
-	int			numofrays;
-    void		*mlx;
-    void		*win;
-	int			window_height;
-	int			window_width;
-	int 		map_height;
-	int 		map_width;
-	char 		**map;
+	t_map_requirements	*var;
+	double				scale;
+	t_player			player;
+	t_img				img;
+	t_ray				ray;
+	t_rays				*rays;
+	int					minisize;
+	int					numofrays;
+	int					alpha;
+    void				*mlx;
+    void				*win;
+	int					window_height;
+	int					window_width;
+	int 				map_height;
+	int 				map_width;
+	int					f_color;
+	int					c_color;
+	char 				**map;
 }   t_data;
 
 /* Drawing */
@@ -121,6 +127,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *data, double beginX, double beginY, double endX, double endY);
 t_rect	get_rect(int x, int y, int dx, int dy);
 void	draw_wall(t_data *data, t_rect rect, int color);
+void	draw_top(t_data *data, t_rect a);
+void	draw_bot(t_data *data, t_rect a);
 
 /* Rendring */
 void	render_2d(t_data *data);
@@ -131,8 +139,10 @@ void	render_rays(t_data *data);
 void	rendering(t_data *data, t_map_requirements *var);
 
 /* Utils */
-int	get_floor(double x, t_data data);
-int	is_player(char c);
+int		get_floor(double x, t_data data);
+int		is_player(char c);
+int		end_game(t_data *data);
+
 
 /* Ray Casting */
 int		game_render(t_data *data);

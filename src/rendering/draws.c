@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:23:22 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 23:01:04 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:38:04 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*pixel;
-
-	pixel = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8)); // color + (255 << 24)
-	*(int *)pixel = color;
+	// pixel = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
+	// *(int *)pixel = color;
+	data->img.addr[y * data->img.line_len + x] = color + (data->alpha << 24);
 }
 
 void	draw_player(t_data *data)
@@ -28,8 +27,8 @@ void	draw_player(t_data *data)
 	int	max;
 
 	i = 0;
-	y = data->player.y * SCALE;
-	x = data->player.x * SCALE;
+	y = data->player.y * data->scale;
+	x = data->player.x * data->scale;
 	max = data->player.x + PLAYER_SIZE / 2;
 	while (i < PLAYER_SIZE)
 	{
@@ -47,8 +46,8 @@ void	draw_ray(t_data *data)
 	double	py;
 	double	pa;
 
-	px = data->player.x * SCALE;
-	py = data->player.y * SCALE;
+	px = data->player.x * data->scale;
+	py = data->player.y * data->scale;
 	pa = data->player.pa;
 	draw_line(data, px, py, px + cos(pa) * PLAYER_RAY, py + sin(pa) * PLAYER_RAY);
 }

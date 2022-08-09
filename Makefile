@@ -6,7 +6,7 @@
 #    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/08 20:52:30 by obouadel         ###   ########.fr        #
+#    Updated: 2022/08/09 17:32:12 by obouadel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ FLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
 
 RM = rm -f
 
-MLX = -lmlx -framework openGL -framework AppKit
 
 SRCS =	main.c\
 		./src/parsing/arg_parsing.c\
@@ -42,14 +41,18 @@ SRCS =	main.c\
 		./src/rendering/render_utils2.c
 
 LIB =	./includes/parsing.h\
-		./includes/cubed.h
+		./includes/cubed.h\
+		./mlx/mlx.h
 
+MLX_LIB = ./mlx
+
+MLX_FLAG = -L./mlx -lmlx -framework openGL -framework AppKit
 
 OBJT = $(SRCS:.c=.o)
 
-
 $(NAME): $(OBJT) LIBFT
-	$(CC) $(FLAGS) $(MLX) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
+	@make -C $(MLX_LIB)
+	$(CC) $(FLAGS) $(MLX_FLAG) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
 
 %.o : %.c $(LIB)
 	$(CC) $(FLAGS) -o $@ -c $< 
@@ -59,13 +62,16 @@ all : $(NAME)
 LIBFT :
 	@make -C ./utils/libft
 
+	
 clean:
 	$(RM) $(OBJT)
 	@make -C ./utils/libft clean
+	@make -C ./mlx clean
 
 fclean:
 	$(RM) $(OBJT) $(NAME)
 	@make -C ./utils/libft fclean
+	@make -C ./mlx clean
 
 re:	fclean all
 

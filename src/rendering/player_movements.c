@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 21:36:07 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:39:07 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ int key_release(int key, t_data *data)
 		data->player.turn_dir = 0;
 	if (key == RIGHT)
 		data->player.turn_dir = 0;
-	if (key == A)
-		data->player.sym = 1;
-	if (key == D)
-		data->player.sym = 0;
 	return (1);
 }
 
@@ -71,5 +67,15 @@ int key_press(int key, t_data *data)
 		data->player.turn_dir = -1;
 	if (key == RIGHT)
 		data->player.turn_dir = 1;
+	if (key == M)
+	{
+		if (data->scale == 1)
+			data->scale = SCALE;
+		else
+			data->scale = 1;
+	}
+	if (key == ESCAPE)
+		end_game(data);
+		
 	return (1);
 }

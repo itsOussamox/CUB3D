@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:31:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 23:23:33 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:32:07 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	intercept_wall(t_data *data, double x, double y)
 
 	floory = get_floor(y, *data);
 	floorx = get_floor(x, *data);
+	if (abs(floory) >= data->map_height || abs(floorx) >= (int)ft_strlen(data->map[floory]))
+		return (1);
 	if (data->map[abs(floory)][abs(floorx)] == '1')
 		return (1);
 	return (0);

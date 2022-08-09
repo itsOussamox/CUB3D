@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:33:35 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 22:47:56 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:38:04 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_map(t_data *data)
 
 void	render_2d(t_data *data)
 {
-	data->minisize = floor(TILE_SIZE * SCALE);
+	data->minisize = floor(TILE_SIZE * data->scale);
 	ft_background_fill(data, data->minisize, 0x000000);
 	draw_map(data);
 	put_player(data);

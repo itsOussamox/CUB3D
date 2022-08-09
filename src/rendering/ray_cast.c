@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:32:58 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/08 23:23:30 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:04:40 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static double	horizontal_intersect(t_data *data, double rayangle)
 	if (ray_facingdown(rayangle))
 		yintercept += data->minisize;
 	if (ray_facingup(rayangle))
-		yintercept--;
+		yintercept -= 0.0001;
 	xintercept = data->player.x + ((yintercept - data->player.y) / tan(rayangle));
 	data->ray.ystep = data->minisize;
 	if (ray_facingup(rayangle))
@@ -74,7 +74,7 @@ static double	vertical_intersect(t_data *data, double rayangle)
 	if (ray_facingright(rayangle))
 		xintercept += data->minisize;
 	if (ray_facingleft(rayangle))
-		xintercept--;
+		xintercept -= 0.0001;
 	yintercept = data->player.y + ((xintercept - data->player.x) * tan(rayangle));
 	data->ray.xstep = data->minisize;
 	if (ray_facingleft(rayangle))
@@ -94,8 +94,6 @@ void	ray_cast(t_data *data, double rayangle, int i)
 
 	walldistancev = vertical_intersect(data, rayangle);
 	walldistanceh = horizontal_intersect(data, rayangle);
-	
-
 	if (walldistanceh < walldistancev)
 	{
 		data->rays[i].wallhity = data->ray.horzwallhity;
@@ -106,6 +104,7 @@ void	ray_cast(t_data *data, double rayangle, int i)
 		data->rays[i].wallhity = data->ray.vertwallhity;
 		data->rays[i].wallhitx = data->ray.vertwallhitx;
 	}
+	data->rays[i].angle = rayangle;
 	data->rays[i].distance = hypot(data->rays[i].wallhity - data->player.y, data->rays[i].wallhitx - data->player.x);
 }
 
