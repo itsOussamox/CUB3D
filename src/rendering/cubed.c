@@ -6,14 +6,13 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 22:59:19 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:49:46 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 /* 
 	TO DO LIST :
-	- MOUSE HANDLING [50%]
 	- MINIMAP ADJUSTEMENT [70%]
 	- MOVE PLAYER LEFT AND RIGHT [0%]
 	- TEXTURE MAPPING [0%]
@@ -24,7 +23,9 @@ void	get_mouse_data(t_data *data)
 {
 	int x;
 	int y;
-	
+
+	if (!MOUSE_MOVE)
+		return ;
 	mlx_mouse_get_pos(data->win, &x, &y);
 	if (x > data->mouse.mid_x)
 		data->player.turn_dir = 1;

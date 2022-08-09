@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 22:51:19 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:49:49 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 #define PLAYER_SPEED 5
 #define ROTATION_SPEED 2 * (M_PI / 180)
 #define PLAYER_RAY 10
+#define	MOUSE_MOVE 0
 //KEYHOOKS
 #define W 13
 #define S 1

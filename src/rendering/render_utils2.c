@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 22:14:34 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:50:25 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	render_3d(t_data *data)
 		 - (wallstrip_height / 2), WSTRIP, wallstrip_height);
 		draw_top(data, rect);
 		data->alpha = raydistance / 10;
-		if (data->alpha > 100)
-			data->alpha = 100;
+		if (data->alpha > 150)
+			data->alpha = 150;
 		draw_wall(data, rect, get_wall_color(data, i));
 		draw_bot(data, rect);
 		data->alpha = 0;
