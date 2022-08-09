@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:38:04 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:27:06 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	render_3d(t_data *data)
 	t_rect	rect;
 
 	i = 0 ;
-	// ft_background_fill(data, data->minisize, 0x212121);
 	mlx_clear_window(data->mlx, data->win);
 	while (i < data->numofrays)
 	{
@@ -51,8 +50,8 @@ void	render_3d(t_data *data)
 		if (data->alpha > 100)
 			data->alpha = 100;
 		draw_wall(data, rect, 0xb4b4b4);
-		data->alpha = 0;
 		draw_bot(data, rect);
+		data->alpha = 0;
 		i++;
 	}
 	// int	line_height;

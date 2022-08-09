@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:42:00 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:55:26 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 
 /* COLORS */
 #define GROUND_COLOR 0x808080
-#define WALL_COLOR 0xb1b1b1
+#define WALL_COLOR 0x212121
 /* WINDOW SETTINGS */
-#define TILE_SIZE 128
 #define FOV 60
 #define FOV_ANGLE FOV * (M_PI / 180)
 #define WSTRIP 1
-#define SCALE 0.1
-#define GRID 1
+#define SCALE 0.25
+#define TILE_SIZE 64
+#define GRID 0
 //PLAYER SETTINGS
 #define PLAYER_SIZE TILE_SIZE / 8
 #define PLAYER_COLOR 0x0000FF

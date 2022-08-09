@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:42:17 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:15:59 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:11:00 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,14 @@ void	draw_bot(t_data *data, t_rect a)
 	y = a.y + a.dy;
 	while (y < data->window_height)
 	{
+		data->alpha -= 1;
+		if (data->alpha < 0)
+			data->alpha = 0;
 		x = a.x;
+		// data->alpha = x - (data->window_height / 2);
 		while (x < a.x + a.dx)
 			my_mlx_pixel_put(data, x++, y, data->f_color);
+		// data->alpha--;
 		y++;
 	}
 }
