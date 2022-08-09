@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 18:46:56 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:43:55 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /* 
 	TO DO LIST :
 	- MOUSE HANDLING [50%]
-	- MINIMAP ADJUSTEMENT [10%]
+	- MINIMAP ADJUSTEMENT [70%]
 	- MOVE PLAYER LEFT AND RIGHT [0%]
 	- TEXTURE MAPPING [0%]
 	- DOORS [0%]
@@ -49,7 +49,7 @@ static void set_data(t_data *data, t_map_requirements *var)
 	data->var = var;
 	data->alpha = 1;
 	data->map_height = var->height;
-	data->map_width = 33;
+	data->map_width = var->width;
 	data->window_width = 1920;
 	data->window_height = 1080;
 	data->minisize = TILE_SIZE;

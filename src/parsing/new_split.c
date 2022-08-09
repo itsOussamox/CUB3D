@@ -3,94 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   new_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 11:31:22 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/02 11:49:14 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/09 19:42:23 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
-int	char_is_separator(char c, char *charset)
+int	check_if_split_value(char c, char *split_value)
 {
 	int	i;
 
 	i = 0;
-	while (charset[i] != '\0')
+	while (split_value[i] != '\0')
 	{
-		if (c == charset[i])
-			return (1);
+		if (c == split_value[i])
+			return (-1);
 		i++;
 	}
 	if (c == '\0')
-		return (1);
+		return (-1);
 	return (0);
 }
 
-int	count_words(char *str, char *charset)
-{
-	int	i;
-	int	words;
-
-	words = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (char_is_separator(str[i + 1], charset) == 1
-			&& char_is_separator(str[i], charset) == 0)
-			words++;
-		i++;
-	}
-	return (words);
-}
-
-void	write_word(char *dest, char *from, char *charset)
+void	fill_string(char *dst, char *src, char *split_value)
 {
 	int	i;
 
-	i = 0;
-	while (char_is_separator(from[i], charset) == 0)
+	if (dst == NULL)
 	{
-		dest[i] = from[i];
+		printf("Error: malloc\n");
+		exit(EXIT_FAILURE);
+	}
+	i = 0;
+	while (check_if_split_value(src[i], split_value) == 0)
+	{
+		dst[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
+	dst[i] = '\0';
+	return ;
 }
 
-void	write_split(char **split, char *str, char *charset)
+char	**fill_tab(char *str, char *split_value, int word_count, int i)
 {
-	int		i;
-	int		j;
-	int		word;
+	char	**tab;
+	int		word_len;
 
-	word = 0;
-	i = 0;
+	tab = (char **)malloc(sizeof(char *) * (word_count + 1));
+	if (tab == NULL)
+		return (NULL);
+	tab[word_count] = NULL;
+	word_count = 0;
 	while (str[i] != '\0')
 	{
-		if (char_is_separator(str[i], charset) == 1)
+		if (check_if_split_value(str[i], split_value) == -1)
 			i++;
 		else
 		{
-			j = 0;
-			while (char_is_separator(str[i + j], charset) == 0)
-				j++;
-			split[word] = (char *)malloc(sizeof(char) * (j + 1));
-			write_word(split[word], str + i, charset);
-			i += j;
-			word++;
+			word_len = 0;
+			while (check_if_split_value(str[i + word_len], split_value) == 0)
+				word_len++;
+			tab[word_count] = (char *)malloc(sizeof(char) * (word_len + 1));
+			fill_string(tab[word_count], str + i, split_value);
+			i += word_len;
+			word_count++;
 		}
 	}
+	return (tab);
 }
 
-char	**clear_tabs_and_spaces(char *str, char *charset)
+int	get_number_of_tabs(char *str, char *split_value)
 {
-	char	**res;
-	int		words;
+	int	i;
+	int	count;
 
-	words = count_words(str, charset);
-	res = (char **)malloc(sizeof(char *) * (words + 1));
-	res[words] = 0;
-	write_split(res, str, charset);
-	return (res);
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (check_if_split_value(str[i], split_value) == 0
+			&& check_if_split_value(str[i + 1], split_value) == -1)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+char	**clear_tabs_and_spaces(char *str, char *split_value)
+{
+	char	**tab;
+	int		word_count;
+
+	word_count = get_number_of_tabs(str, split_value);
+	tab = fill_tab(str, split_value, word_count, 0);
+	if (tab == NULL)
+	{
+		printf("Error: malloc\n");
+		return (NULL);
+	}
+	return (tab);
 }

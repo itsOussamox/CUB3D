@@ -6,12 +6,31 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/08 22:43:24 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:41:18 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/parsing.h"
 #include "./includes/cubed.h"
+
+void	get_map_height_and_width(int i, t_map_requirements *var)
+{
+	int	width;
+	int	max_width;
+
+	max_width = 0;
+	width = 0;
+	while (var->map[i])
+	{
+		width = (int)ft_strlen(var->map[i]);
+		if (max_width < width)
+			max_width = width;
+		var->height++;
+		i++;
+	}
+	var->width = max_width;
+	return ;
+}
 
 void	innit_map_rec(t_map_requirements *var)
 {

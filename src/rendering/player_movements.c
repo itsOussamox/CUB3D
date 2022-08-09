@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 17:39:07 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:33:10 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ double	player_move(t_data *data)
     newy = data->player.y + (sin(data->player.pa) * PLAYER_SPEED) * data->player.move_dir;
     y = floor(newy) / data->minisize;
     x = floor(newx) / data->minisize;
-    if (data->map[y][x] == '1')
+    if (data->map[y][x] >= '1' && ft_isdigit(data->map[y][x]))
         return (1);
     data->player.x = newx;
     data->player.y = newy;
-
     return (0);
 }
 

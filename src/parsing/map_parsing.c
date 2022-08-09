@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/08 14:04:35 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/09 19:42:08 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	check_non_map_elm_for_error(t_map_requirements **var)
 		ft_putendl_fd("Error:\nmissing parameter", 2);
 		return (free_file_path((*var)), 1);
 	}
-	while ((*var)->map[i++])
-		(*var)->height++;
+	get_map_height_and_width(i, (*var));
 	return (0);
 }
 

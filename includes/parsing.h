@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/08 14:07:39 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/09 19:41:45 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_content
 	int			f;
 	int			c;
 	int			height;
+	int			width;
 	char		**map;
 	int			x_player;
 	int			y_player;
@@ -61,13 +62,9 @@ int		init_collers(t_map_requirements *var, char landscape, char **tab);
 
 // utils
 void	free_2d(char **var);
+char	**clear_tabs_and_spaces(char *str, char *charset);
+void	get_map_height_and_width(int i, t_map_requirements *var);
 void	free_file_path(t_map_requirements *var);
 
-//// new split
-char	**clear_tabs_and_spaces(char *str, char *charset);
-int		char_is_separator(char c, char *charset);
-int		count_words(char *str, char *charset);
-void	write_word(char *dest, char *from, char *charset);
-void	write_split(char **split, char *str, char *charset);
 
 #endif
