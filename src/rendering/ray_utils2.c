@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:31:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 21:59:01 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:21:52 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,25 @@ double	adjust_ray_x(t_data data, int x)
 	return (x);
 }
 
-int	intercept_wall(t_data *data, double x, double y)
+int	intercept_wall(t_data *data, double x, double y, char sym)
 {
-	int	floorx;
-	int	floory;
+	int		floorx;
+	int		floory;
+	char	hitpoint;
 
 	floory = get_floor(y, *data);
 	floorx = get_floor(x, *data);
 	if (abs(floory) >= data->map_height || abs(floorx) >= (int)ft_strlen(data->map[floory]))
 		return (1);
-	if (data->map[abs(floory)][abs(floorx)] == '1')
+	hitpoint = data->map[abs(floory)][abs(floorx)];
+	if (hitpoint >= '1' && ft_isdigit(hitpoint))
+	{
+		if (sym == 'V')
+			data->ray.hitpointv = hitpoint;
+		else
+			data->ray.hitpointh = hitpoint;
 		return (1);
+	}
 	return (0);
 }
 

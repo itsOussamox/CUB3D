@@ -6,17 +6,16 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 23:49:46 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:28:26 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 /* 
 	TO DO LIST :
-	- MINIMAP ADJUSTEMENT [70%]
 	- MOVE PLAYER LEFT AND RIGHT [0%]
-	- TEXTURE MAPPING [0%]
-	- DOORS [0%]
+	- TEXTURE MAPPING [30%]
+	- DOORS [20%]
  */
 
 void	get_mouse_data(t_data *data)
@@ -55,13 +54,13 @@ int	game_render(t_data *data)
 	render_3d(data);
 	render_2d(data);
 	free(data->rays);
-	data->rays = NULL;
+	data->rays = 0;
 	return (1);
 }
 
 static void set_data(t_data *data, t_map_requirements *var)
 {
-	data->rays = NULL;
+	data->rays = 0;
 	data->scale = SCALE;
 	data->var = var;
 	data->alpha = 1;
@@ -91,7 +90,8 @@ static void set_data(t_data *data, t_map_requirements *var)
 void	rendering(t_data *data, t_map_requirements *var)
 {
 	set_data(data, var);
-	mlx_mouse_hide();
+	if (MOUSE_MOVE)
+		mlx_mouse_hide();
 	mlx_hook(data->win, 17, 0, end_game, data);
 	mlx_hook(data->win, 3, (1L<<1), key_release, data);
 	mlx_hook(data->win, 2, (1L<<0), key_press, data);

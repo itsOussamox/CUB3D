@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 23:50:25 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:27:34 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	render_3d(t_data *data)
 	mlx_clear_window(data->mlx, data->win);
 	while (i < data->numofrays)
 	{
+		if (i == data->numofrays / 2)
+			printf("[%c]\n", data->rays[i].tab_hit);
 		raydistance = data->rays[i].distance * cos(data->rays[i].angle - data->player.pa);
 		distance_pp = (data->window_width / 2) / fabs(tan(FOV_ANGLE / 2));
 		wallstrip_height = (TILE_SIZE / raydistance) * distance_pp;

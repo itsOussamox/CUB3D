@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:32:58 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 21:19:05 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:24:58 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	get_wall_intercept(t_data *data, double xintercept, double yintercept, ch
 	{
 		savex = nextx;
 		savey = nexty;
-		if (intercept_wall(data, nextx, nexty))
+		if (intercept_wall(data, nextx, nexty, sym))
 			break;
 		nextx += data->ray.xstep;
 		nexty += data->ray.ystep;
@@ -99,12 +99,14 @@ void	ray_cast(t_data *data, double rayangle, int i)
 		data->rays[i].wallhity = data->ray.horzwallhity;
 		data->rays[i].wallhitx = data->ray.horzwallhitx;
 		data->rays[i].sym = 'H';
+		data->rays[i].tab_hit = data->ray.hitpointh;
 	}
 	else
 	{
 		data->rays[i].wallhity = data->ray.vertwallhity;
 		data->rays[i].wallhitx = data->ray.vertwallhitx;
 		data->rays[i].sym = 'V';
+		data->rays[i].tab_hit = data->ray.hitpointv;
 	}
 	data->rays[i].angle = rayangle;
 	data->rays[i].distance = hypot(data->rays[i].wallhity - data->player.y, data->rays[i].wallhitx - data->player.x);

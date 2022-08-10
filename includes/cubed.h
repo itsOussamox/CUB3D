@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 23:49:49 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:27:48 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_ray
 	double	horzwallhity;
 	double	vertwallhitx;
 	double	vertwallhity;
+	char	hitpointv;
+	char	hitpointh;
 	double	wallhitx;
 	double	wallhity;
 	double	xstep;
@@ -85,6 +87,7 @@ typedef struct s_rays
 	double	wallhitx;
 	double	wallhity;
 	char	sym;
+	char	tab_hit;
 	double	angle;
 }	t_rays;
 // Image to draw on
@@ -172,7 +175,7 @@ double	adjust_ray_y(t_data data, int y);
 double	adjust_ray_x(t_data data, int x);
 void	set_wall_hit(t_data *data, double x, double y, char sym);
 double	get_wall_distance(t_data *data, char sym);
-int		intercept_wall(t_data *data, double x, double y);
+int		intercept_wall(t_data *data, double x, double y, char sym);
 
 /* Player Movement */
 void	set_player(t_data *data, t_map_requirements *var);
