@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:33:35 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 23:46:56 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:57:40 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static int	color_walls(t_data *data, int i, int xoff, int yoff)
 	if (data->rays[i].angle > M_PI && data->rays[i].sym == 'H')
 		return (get_south_texture(data, xoff, yoff));
 	if (data->rays[i].angle < M_PI && data->rays[i].sym == 'H')
-		return (get_south_texture(data, xoff, yoff));
+		return (get_north_texture(data, xoff, yoff));
 	if ((data->rays[i].angle > M_PI / 2  &&
 		data->rays[i].angle < M_PI + M_PI / 2) && data->rays[i].sym == 'V')
-		return (get_south_texture(data, xoff, yoff));
+		return (get_east_texture(data, xoff, yoff));
 	if ((data->rays[i].angle < M_PI / 2 || 
 		data->rays[i].angle > M_PI + M_PI / 2) && data->rays[i].sym == 'V')
-		return (get_south_texture(data, xoff, yoff));
+		return (get_west_texture(data, xoff, yoff));
 	return (0);
 }
 
@@ -32,7 +32,7 @@ int	get_wall_color(t_data *data, int i, int xoff, int yoff)
 	if (data->rays[i].tab_hit == '1')
 		return (color_walls(data, i, xoff, yoff));
 	if (data->rays[i].tab_hit == '2')
-		return (0x00fff3);
+		return (get_door_texture(data, xoff, yoff));
 	printf("cant find");
 	return (0x330906);
 }

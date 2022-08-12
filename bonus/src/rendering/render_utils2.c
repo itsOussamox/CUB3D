@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 21:50:11 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:12:06 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	render_3d(t_data *data)
 		raydistance = data->rays[i].distance * cos(data->rays[i].angle - data->player.pa);
 		distance_pp = (data->window_width / 2) / fabs(tan(FOV_ANGLE / 2));
 		wallstrip_height = (TILE_SIZE / raydistance) * distance_pp;
-		if (wallstrip_height > data->window_height)
-			wallstrip_height = data->window_height - 1;
-		rect = get_rect(i * WSTRIP, (data->window_height / 2)
-		 - (wallstrip_height / 2), WSTRIP, wallstrip_height);
+		rect = get_rect(i, (data->window_height / 2)
+		 - (wallstrip_height / 2), 1, wallstrip_height); 
 		draw_top(data, rect);
 		data->alpha = raydistance / 10;
 		if (data->alpha > 150)

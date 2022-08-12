@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/10 21:36:23 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:10:33 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ int	main(int ac, char **av)
 	{
 		if (check_file_requirements(&var))
 			return (free_2d(var.map), free_file_path(&var), 1);
-		printf("[%s]\n[%s]\n[%s]\n[%s]\n", var.we, var.ea, var.no, var.so);
-		printf("%d, %d \n", var.c, var.f);
-		printf("height: %d\n", var.height);
-		printf("player y = %d\nplayer x = %d\nplayer direction = %c\n", var.y_player, var.x_player, var.player_orientaition);
 	}
 	rendering(&data, &var);
 	return (0);

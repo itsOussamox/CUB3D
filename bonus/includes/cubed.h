@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 23:47:30 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:14:56 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <limits.h>
 
-/* COLORS */
+/* 2D COLORS */
 #define GROUND_COLOR 0x808080
 #define WALL_COLOR 0x212121
 #define	DOOR_COLOR 0x2121FF
@@ -34,7 +34,7 @@
 //PLAYER SETTINGS
 #define PLAYER_SIZE TILE_SIZE / 8
 #define PLAYER_COLOR 0x0000FF
-#define PLAYER_SPEED 3
+#define PLAYER_SPEED 4
 #define ROTATION_SPEED 2 * (M_PI / 180)
 #define PLAYER_RAY 10
 #define	MOUSE_MOVE 0
@@ -48,6 +48,12 @@
 #define RIGHT 124
 #define LEFT 123
 #define	M 46
+//TEXTURES
+#define SO_TEXT "./xpm/xpm/wall-2.xpm"
+#define NO_TEXT "./xpm/xpm/wall-4.xpm"
+#define EA_TEXT "./xpm/xpm/wall-3.xpm"
+#define WE_TEXT "./xpm/xpm/wall-1.xpm"
+#define DOOR_TEXT "./xpm/xpm/door.xpm"
 
 // Mouse data
 typedef struct s_mouse
@@ -133,6 +139,8 @@ typedef struct s_data
 	int					*ea_data;
 	void				*we_img;
 	int					*we_data;
+	void				*door_img;
+	int					*door_data;
 	int					minisize;
 	int					numofrays;
 	int					alpha;
@@ -199,8 +207,12 @@ int		key_press(int key, t_data *data);
 void	get_mouse_data(t_data *data);
 
 /* Textures / Colors */
-int		get_south_texture(t_data *data, int xoff, int yoff);
 int		get_wall_color(t_data *data, int i, int xoff, int yoff);
+int		get_door_texture(t_data *data, int xoff, int yoff);
+int		get_south_texture(t_data *data, int xoff, int yoff);
+int		get_east_texture(t_data *data, int xoff, int yoff);
+int		get_west_texture(t_data *data, int xoff, int yoff);
+int		get_north_texture(t_data *data, int xoff, int yoff);
 
 
 
