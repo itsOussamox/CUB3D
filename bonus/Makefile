@@ -6,7 +6,7 @@
 #    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/12 14:49:41 by obouadel         ###   ########.fr        #
+#    Updated: 2022/08/12 15:48:39 by obouadel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS =	main.c\
 		./src/rendering/render_utils2.c\
 		./src/rendering/mouse.c\
 		./src/rendering/colors.c\
+		./src/rendering/sounds.c\
 
 LIB =	./includes/parsing.h\
 		./includes/cubed.h\

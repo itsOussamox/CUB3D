@@ -6,30 +6,39 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 14:17:32 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:16:48 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 
-int	open_door(t_data *data)
+void	open_door(t_data *data)
 {
-	int	i;
-	int	x;
-	int	y;
+	static double	counter = 0;
+	int				i;
+	static int		x;
+	static int		y;
 
 	i = data->numofrays / 2;
+	if (counter)
+		counter++;
+	if (counter == 250)
+	{
+		data->map[y][x] = '2';
+		counter = 0;
+	}
 	if (data->player.open_door == 0)
-		return (0);
+		return ;
 	if (data->rays[i].tab_hit == '2' &&
 		data->rays[i].distance <= 45)
 	{
+		ft_playsound(2);		
 		x = floor(data->rays[i].wallhitx) / data->minisize;
 		y = floor(data->rays[i].wallhity) / data->minisize;
 		data->map[y][x] = '0';
+		counter = 1;
 	}
 	data->player.open_door = 0;
-	return (1);
 }
 
 void	render_angle(t_data *data)
@@ -42,8 +51,6 @@ void	render_angle(t_data *data)
 	if (data->player.pa == 0 || data->player.pa == M_PI)
 		data->player.pa += 0.00000001;
 }
-
-
 
 void	player_move(t_data *data)
 {

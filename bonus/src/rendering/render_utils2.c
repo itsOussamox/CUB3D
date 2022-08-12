@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 15:12:06 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:45:13 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	render_3d(t_data *data)
 		rect = get_rect(i, (data->window_height / 2)
 		 - (wallstrip_height / 2), 1, wallstrip_height); 
 		draw_top(data, rect);
-		data->alpha = raydistance / 10;
-		if (data->alpha > 150)
-			data->alpha = 150;
+		data->alpha = raydistance / 6;
+		if (data->alpha > 250)
+			data->alpha = 250;
 		draw_wall(data, rect, i);
 		draw_bot(data, rect);
 		data->alpha = 0;

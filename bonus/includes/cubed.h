@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 15:14:56 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:55:49 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #define PLAYER_SPEED 4
 #define ROTATION_SPEED 2 * (M_PI / 180)
 #define PLAYER_RAY 10
-#define	MOUSE_MOVE 0
+#define	MOUSE_MOVE 1
 //KEYHOOKS
 #define W 13
 #define S 1
@@ -179,6 +179,7 @@ int		get_floor(double x, t_data data);
 int		is_player(char c);
 int		end_game(t_data *data);
 t_rect	get_rect(int x, int y, int dx, int dy);
+void	ft_playsound(int sound);
 
 
 /* Ray Casting */
@@ -201,7 +202,7 @@ int		intercept_wall(t_data *data, double x, double y, char sym);
 void	set_player(t_data *data, t_map_requirements *var);
 void	put_player(t_data *data);
 void	player_move(t_data *data);
-int		open_door(t_data *data);
+void	open_door(t_data *data);
 int		key_release(int key, t_data *data);
 int		key_press(int key, t_data *data);
 void	get_mouse_data(t_data *data);
