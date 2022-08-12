@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 16:45:13 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:43:21 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	render_3d(t_data *data)
 		i++;
 	}
 	draw_cursor(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.addr, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 } 
