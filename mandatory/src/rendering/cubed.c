@@ -3,20 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:50:10 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:15:31 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
-/* 
+/*
 	TO DO LIST :
-	- MOVE PLAYER LEFT AND RIGHT [0%]
-	- TEXTURE MAPPING [30%]
-	- DOORS [20%]
- */
+	- MOVE PLAYER LEFT AND RIGHT [30%]
+	- DOORS [80%]
+	TO UNDERSTAND LIST :
+	- hypot
+	- ray distance
+*/
+
+
+void	set_textures(t_data *data)
+{
+	int	tab[2];
+
+	data->so_img = mlx_xpm_file_to_image(data->mlx, SO_TEXT, &tab[0], &tab[1]);
+	data->so_data = (int *)mlx_get_data_addr(data->so_img, &tab[0], &tab[0], &tab[0]);
+	data->we_img = mlx_xpm_file_to_image(data->mlx, WE_TEXT, &tab[0], &tab[1]);
+	data->we_data = (int *)mlx_get_data_addr(data->we_img, &tab[0], &tab[0], &tab[0]);
+	data->ea_img = mlx_xpm_file_to_image(data->mlx, EA_TEXT, &tab[0], &tab[1]);
+	data->ea_data = (int *)mlx_get_data_addr(data->ea_img, &tab[0], &tab[0], &tab[0]);
+	data->no_img = mlx_xpm_file_to_image(data->mlx, NO_TEXT, &tab[0], &tab[1]);
+	data->no_data = (int *)mlx_get_data_addr(data->no_img, &tab[0], &tab[0], &tab[0]);
+	data->door_img = mlx_xpm_file_to_image(data->mlx, DOOR_TEXT, &tab[0], &tab[1]);
+	data->door_data = (int *)mlx_get_data_addr(data->door_img, &tab[0], &tab[0], &tab[0]);
+}
 
 int	end_game(t_data *data)
 {
@@ -24,6 +43,12 @@ int	end_game(t_data *data)
 		free(data->rays);
 	free_file_path(data->var);
 	free_2d(data->var->map);
+	mlx_destroy_image(data->mlx, data->door_img);
+	mlx_destroy_image(data->mlx, data->so_img);
+	mlx_destroy_image(data->mlx, data->no_img);
+	mlx_destroy_image(data->mlx, data->we_img);
+	mlx_destroy_image(data->mlx, data->ea_img);
+	mlx_destroy_image(data->mlx, data->img.mlx_img);
 	exit(0);
 	return (1);
 }
@@ -31,9 +56,12 @@ int	end_game(t_data *data)
 int	game_render(t_data *data)
 {
 	render_angle(data);
-	cast_rays(data);
 	player_move(data);
+	cast_rays(data);
+	open_door(data);
+	// player_strafe(data);
 	render_3d(data);
+	render_2d(data);
 	free(data->rays);
 	data->rays = 0;
 	return (1);
@@ -42,6 +70,7 @@ int	game_render(t_data *data)
 static void set_data(t_data *data, t_map_requirements *var)
 {
 	data->rays = 0;
+	data->scale = SCALE;
 	data->var = var;
 	data->alpha = 1;
 	data->map_height = var->height;
@@ -63,6 +92,7 @@ static void set_data(t_data *data, t_map_requirements *var)
 	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,
 		&data->img.bpp, &data->img.line_len, &data->img.endian);
 	data->img.line_len /= 4;
+	set_textures(data);
 }
 
 void	rendering(t_data *data, t_map_requirements *var)

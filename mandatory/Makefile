@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
+#    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/10 15:34:04 by obouadel         ###   ########.fr        #
+#    Updated: 2022/08/12 17:15:45 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRCS =	main.c\
 		./src/rendering/ray_utils.c\
 		./src/rendering/ray_utils2.c\
 		./src/rendering/render_utils.c\
-		./src/rendering/render_utils2.c
+		./src/rendering/render_utils2.c\
+		./src/rendering/colors.c
 
 LIB =	./includes/parsing.h\
 		./includes/cubed.h\
@@ -55,14 +56,14 @@ $(NAME): $(OBJT) LIBFT
 	$(CC) $(FLAGS) $(MLX_FLAG) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
 
 %.o : %.c $(LIB)
-	$(CC) $(FLAGS) -o $@ -c $< 
+	$(CC) $(FLAGS) -o $@ -c $<
 
 all : $(NAME)
 
 LIBFT :
 	@make -C ./utils/libft
 
-	
+
 clean:
 	$(RM) $(OBJT)
 	@make -C ./utils/libft clean

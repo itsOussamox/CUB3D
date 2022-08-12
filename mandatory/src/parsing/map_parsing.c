@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/10 15:53:18 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:53:22 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_map_chars(char **map, t_map_requirements *var)
 			if (map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'E'
 				&& map[i][j] != 'W' && map[i][j] != ' '
 				&& map[i][j] != '\t' && map[i][j] != '1'
-				&& map[i][j] != '0')
+				&& map[i][j] != '0' && map[i][j] != '2')
 			{
 				ft_putendl_fd("Error:\nunrecognized element in map!", 2);
 				return (1);

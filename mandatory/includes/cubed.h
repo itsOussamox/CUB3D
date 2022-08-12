@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:49:43 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:14:54 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <limits.h>
 
-/* COLORS */
+/* 2D COLORS */
 #define GROUND_COLOR 0x808080
 #define WALL_COLOR 0x212121
 #define	DOOR_COLOR 0x2121FF
@@ -28,12 +28,13 @@
 #define FOV 60
 #define FOV_ANGLE FOV * (M_PI / 180)
 #define WSTRIP 1
+#define SCALE 0.25
 #define TILE_SIZE 32
 #define GRID 0
 //PLAYER SETTINGS
 #define PLAYER_SIZE TILE_SIZE / 8
 #define PLAYER_COLOR 0x0000FF
-#define PLAYER_SPEED 5
+#define PLAYER_SPEED 4
 #define ROTATION_SPEED 2 * (M_PI / 180)
 #define PLAYER_RAY 10
 //KEYHOOKS
@@ -46,6 +47,12 @@
 #define RIGHT 124
 #define LEFT 123
 #define	M 46
+//TEXTURES
+#define SO_TEXT "./xpm/xpm/wall-2.xpm"
+#define NO_TEXT "./xpm/xpm/wall-4.xpm"
+#define EA_TEXT "./xpm/xpm/wall-3.xpm"
+#define WE_TEXT "./xpm/xpm/wall-1.xpm"
+#define DOOR_TEXT "./xpm/xpm/door.xpm"
 
 // Rect data
 typedef struct s_rect
@@ -112,6 +119,17 @@ typedef struct s_data
 	t_ray				ray;
 	t_rays				*rays;
 	double				scale;
+	//images
+	void				*so_img;
+	int					*so_data;
+	void				*no_img;
+	int					*no_data;
+	void				*ea_img;
+	int					*ea_data;
+	void				*we_img;
+	int					*we_data;
+	void				*door_img;
+	int					*door_data;
 	int					minisize;
 	int					numofrays;
 	int					alpha;
@@ -132,13 +150,13 @@ void	draw_player(t_data *data);
 void	ft_background_fill(t_data *data, int size, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *data, double beginX, double beginY, double endX, double endY);
-t_rect	get_rect(int x, int y, int dx, int dy);
-void	draw_wall(t_data *data, t_rect rect, int color);
+void	draw_wall(t_data *data, t_rect rect, int i);
 void	draw_top(t_data *data, t_rect a);
 void	draw_bot(t_data *data, t_rect a);
 void	draw_cursor(t_data *data);
 
 /* Rendring */
+void	render_2d(t_data *data);
 void	render_3d(t_data *data);
 void	draw_map(t_data *data);
 void	render_angle(t_data *data);
@@ -149,7 +167,7 @@ void	rendering(t_data *data, t_map_requirements *var);
 int		get_floor(double x, t_data data);
 int		is_player(char c);
 int		end_game(t_data *data);
-int		get_wall_color(t_data *data, int i);
+t_rect	get_rect(int x, int y, int dx, int dy);
 
 
 /* Ray Casting */
@@ -171,8 +189,19 @@ int		intercept_wall(t_data *data, double x, double y, char sym);
 /* Player Movement */
 void	set_player(t_data *data, t_map_requirements *var);
 void	put_player(t_data *data);
-double	player_move(t_data *data);
+void	player_move(t_data *data);
+void	open_door(t_data *data);
 int		key_release(int key, t_data *data);
 int		key_press(int key, t_data *data);
+
+/* Textures / Colors */
+int		get_wall_color(t_data *data, int i, int xoff, int yoff);
+int		get_door_texture(t_data *data, int xoff, int yoff);
+int		get_south_texture(t_data *data, int xoff, int yoff);
+int		get_east_texture(t_data *data, int xoff, int yoff);
+int		get_west_texture(t_data *data, int xoff, int yoff);
+int		get_north_texture(t_data *data, int xoff, int yoff);
+
+
 
 #endif

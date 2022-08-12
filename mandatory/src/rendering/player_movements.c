@@ -3,23 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   player_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:50:30 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:13:48 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 
-static int	open_door(t_data *data)
+void	open_door(t_data *data)
 {
+	static double	counter = 0;
+	int				i;
+	static int		x;
+	static int		y;
+
+	i = data->numofrays / 2;
+	if (counter)
+		counter++;
+	if (counter == 250)
+	{
+		data->map[y][x] = '2';
+		counter = 0;
+	}
 	if (data->player.open_door == 0)
-		return (0);
-	if (data->rays[data->numofrays / 2].tab_hit == '2' &&
-		data->rays[data->numofrays / 2].distance <= 20)
-		printf("hi\n");
-	return (1);
+		return ;
+	if (data->rays[i].tab_hit == '2' &&
+		data->rays[i].distance <= 45)
+	{
+		x = floor(data->rays[i].wallhitx) / data->minisize;
+		y = floor(data->rays[i].wallhity) / data->minisize;
+		data->map[y][x] = '0';
+		counter = 1;
+	}
+	data->player.open_door = 0;
 }
 
 void	render_angle(t_data *data)
@@ -33,28 +51,25 @@ void	render_angle(t_data *data)
 		data->player.pa += 0.00000001;
 }
 
-double	player_move(t_data *data)
+void	player_move(t_data *data)
 {
     double    newx;
     double    newy;
     int        x;
     int        y;
 
-	if (open_door(data))
-		data->player.open_door = 0;
     if (!data->player.move_dir)
-        return (1);
+        return ;
     newx = data->player.x + (cos(data->player.pa) * PLAYER_SPEED) * data->player.move_dir;
     newy = data->player.y + (sin(data->player.pa) * PLAYER_SPEED) * data->player.move_dir;
-	// newx = get_strafe_x();
-	// newy = get_strafe_y(data);
+	x = floor(data->player.x) / data->minisize;
     y = floor(newy) / data->minisize;
+    if (data->map[y][x] == '0' || data->map[y][x] == data->var->player_orientaition)
+	    data->player.y = newy;
+	y = floor(data->player.y) / data->minisize;
     x = floor(newx) / data->minisize;
-    if (data->map[y][x] >= '1' && ft_isdigit(data->map[y][x]))
-        return (1);
-    data->player.x = newx;
-    data->player.y = newy;
-    return (0);
+    if (data->map[y][x] == '0'  || data->map[y][x] == data->var->player_orientaition)
+	    data->player.x = newx;
 }
 
 int key_release(int key, t_data *data)
@@ -88,6 +103,13 @@ int key_press(int key, t_data *data)
 		data->player.turn_dir = -1;
 	if (key == RIGHT)
 		data->player.turn_dir = 1;
+	if (key == M)
+	{
+		if (data->scale == 1)
+			data->scale = SCALE;
+		else
+			data->scale = 1;
+	}
 	if (key == E)
 		data->player.open_door = 1;
 	if (key == ESCAPE)

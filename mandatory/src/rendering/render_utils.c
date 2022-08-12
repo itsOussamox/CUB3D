@@ -6,25 +6,34 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:33:35 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:45:22 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:57:40 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 
-int	get_wall_color(t_data *data, int i)
+static int	color_walls(t_data *data, int i, int xoff, int yoff)
 {
 	if (data->rays[i].angle > M_PI && data->rays[i].sym == 'H')
-		return (0xffe800);
+		return (get_south_texture(data, xoff, yoff));
 	if (data->rays[i].angle < M_PI && data->rays[i].sym == 'H')
-		return (0x482b7d);
+		return (get_north_texture(data, xoff, yoff));
 	if ((data->rays[i].angle > M_PI / 2  &&
 		data->rays[i].angle < M_PI + M_PI / 2) && data->rays[i].sym == 'V')
-		return (0xff3eeb);
+		return (get_east_texture(data, xoff, yoff));
 	if ((data->rays[i].angle < M_PI / 2 || 
 		data->rays[i].angle > M_PI + M_PI / 2) && data->rays[i].sym == 'V')
-		return (0x55ff55);
-		printf("cant find");
+		return (get_west_texture(data, xoff, yoff));
+	return (0);
+}
+
+int	get_wall_color(t_data *data, int i, int xoff, int yoff)
+{
+	if (data->rays[i].tab_hit == '1')
+		return (color_walls(data, i, xoff, yoff));
+	if (data->rays[i].tab_hit == '2')
+		return (get_door_texture(data, xoff, yoff));
+	printf("cant find");
 	return (0x330906);
 }
 
@@ -70,12 +79,11 @@ void	draw_map(t_data *data)
 
 void	render_2d(t_data *data)
 {
-	(void)data;
-	// data->minisize = floor(TILE_SIZE * data->scale);
-	// draw_map(data);
-	// put_player(data);
-	// render_rays(data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
+	data->minisize = floor(TILE_SIZE * data->scale);
+	draw_map(data);
+	put_player(data);
+	render_rays(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 }
 
 void	ft_background_fill(t_data *data, int size, int color)

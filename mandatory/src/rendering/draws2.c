@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:42:17 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/09 18:11:00 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:06:16 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_rect	get_rect(int x, int y, int dx, int dy)
 	t_rect	newrect;
 
 	newrect.y = y;
+	newrect.dy = dy;
 	newrect.x = x;
 	newrect.dx = dx;
-	newrect.dy = dy;
 	return (newrect);
 }
 
@@ -75,22 +75,38 @@ void	draw_top(t_data *data, t_rect a)
 	}
 }
 
-void	draw_wall(t_data *data, t_rect rect, int color)
+void	draw_wall(t_data *data, t_rect rect, int idx)
 {
 	int	i;
 	int	j;
-	int	z;
+	int	x_offset;
+	int	y_offset;
+	int	max;
 
+	max = rect.y + rect.dy;
 	i = rect.y;
-	z = 0;
-	while (i < rect.y + rect.dy)
+	if (i < 0)
+		i = 0;
+	if (max >= data->window_height)
+		max = data->window_height;
+	if (data->rays[idx].sym == 'V')
+		x_offset = (int)data->rays[idx].wallhity % TILE_SIZE;
+	else
+		x_offset = (int)data->rays[idx].wallhitx % TILE_SIZE;
+	while (i < max)
 	{
+		y_offset = (i - rect.y)  * ((double)TILE_SIZE / rect.dy);
+		if (y_offset > TILE_SIZE)
+			y_offset = TILE_SIZE;
 		j = rect.x;
 		while (j < rect.x + rect.dx)
 		{
-			my_mlx_pixel_put(data, j, i, color);
+			// write(2, "a\n", 2);
+			if (i >= 0 && i < data->window_height)
+				my_mlx_pixel_put(data, j, i,
+					get_wall_color(data, idx, x_offset, y_offset));
 			j++;
 		}
-		++i;
+		i++;
 	}
 }
