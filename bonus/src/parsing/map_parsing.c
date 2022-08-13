@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/10 15:53:22 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/13 13:29:54 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	check_map_chars(char **map, t_map_requirements *var)
 	int	i;
 
 	nb_of_players = 0;
-	i = 6;
-	while (map[i])
+	i = 5;
+	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
@@ -75,7 +75,6 @@ int	check_map_chars(char **map, t_map_requirements *var)
 				return (1);
 			}
 		}
-		i++;
 	}
 	if (nb_of_players != 1)
 		return (ft_putendl_fd("Error:\ninvalid number of players!", 2), 1);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
+#    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/12 15:48:39 by obouadel         ###   ########.fr        #
+#    Updated: 2022/08/13 13:11:17 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS =	main.c\
 		./src/rendering/draws2.c\
 		./src/rendering/player_data.c\
 		./src/rendering/player_movements.c\
+		./src/rendering/player_movmentes2.c\
 		./src/rendering/ray_cast.c\
 		./src/rendering/ray_utils.c\
 		./src/rendering/ray_utils2.c\
@@ -58,14 +59,14 @@ $(NAME): $(OBJT) LIBFT
 	$(CC) $(FLAGS) $(MLX_FLAG) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
 
 %.o : %.c $(LIB)
-	$(CC) $(FLAGS) -o $@ -c $< 
+	$(CC) $(FLAGS) -o $@ -c $<
 
 all : $(NAME)
 
 LIBFT :
 	@make -C ./utils/libft
 
-	
+
 clean:
 	$(RM) $(OBJT)
 	@make -C ./utils/libft clean

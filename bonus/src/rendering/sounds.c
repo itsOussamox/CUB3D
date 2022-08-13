@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sounds.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:47:28 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 16:41:59 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/13 12:42:58 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_playsound(int sound)
 {
 	int	i;
-	
+
 	i = fork();
 	if (i == 0)
 	{

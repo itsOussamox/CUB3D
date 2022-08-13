@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draws2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:42:17 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 15:06:16 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/13 13:20:13 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ void	draw_bot(t_data *data, t_rect a)
 		if (data->alpha < 0)
 			data->alpha = 0;
 		x = a.x;
-		// data->alpha = x - (data->window_height / 2);
 		while (x < a.x + a.dx)
 			my_mlx_pixel_put(data, x++, y, data->f_color);
-		// data->alpha--;
 		y++;
 	}
 }
@@ -101,7 +99,6 @@ void	draw_wall(t_data *data, t_rect rect, int idx)
 		j = rect.x;
 		while (j < rect.x + rect.dx)
 		{
-			// write(2, "a\n", 2);
 			if (i >= 0 && i < data->window_height)
 				my_mlx_pixel_put(data, j, i,
 					get_wall_color(data, idx, x_offset, y_offset));

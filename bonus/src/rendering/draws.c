@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draws.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:23:22 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:10:24 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/13 13:25:04 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	// pixel = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
-	// *(int *)pixel = color;
 	data->img.addr[y * data->img.line_len + x] = color + (data->alpha << 24);
 }
 
@@ -49,29 +47,31 @@ void	draw_ray(t_data *data)
 	px = data->player.x * data->scale;
 	py = data->player.y * data->scale;
 	pa = data->player.pa;
-	draw_line(data, px, py, px + cos(pa) * PLAYER_RAY, py + sin(pa) * PLAYER_RAY);
+	draw_line(data, px, py, px + cos(pa)
+		* PLAYER_RAY, py + sin(pa) * PLAYER_RAY);
 }
 
-void	draw_line(t_data *data, double beginX, double beginY, double endX, double endY)
+void	draw_line(t_data *data, double beginX, double beginY,
+	double endX, double endY)
 {
-	double	pixelX;
-	double	pixelY;
-	double	deltaX;
-	double	deltaY;
+	double	pixel_x;
+	double	pixel_y;
+	double	delta_x;
+	double	deltay;
 	int		pixels;
 
-	deltaY = endY - beginY;
-	deltaX = endX - beginX;
-	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	deltaX /= pixels; // 1
-	deltaY /= pixels;
-	pixelX = beginX;
-	pixelY = beginY;
+	deltay = endY - beginY;
+	delta_x = endX - beginX;
+	pixels = sqrt((delta_x * delta_x) + (deltay * deltay));
+	delta_x /= pixels;
+	deltay /= pixels;
+	pixel_x = beginX;
+	pixel_y = beginY;
 	while (pixels)
 	{
-		my_mlx_pixel_put(data, pixelX, pixelY, 0xFF0000);
-		pixelX += deltaX;
-		pixelY += deltaY;
+		my_mlx_pixel_put(data, pixel_x, pixel_y, 0xFF0000);
+		pixel_x += delta_x;
+		pixel_y += deltay;
 		--pixels;
 	}
 }

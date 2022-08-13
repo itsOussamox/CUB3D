@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 19:19:29 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/13 13:28:10 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
-/* 
+/*
 	TO DO LIST :
 	- MOVE PLAYER LEFT AND RIGHT [30%]
 	- DOORS [80%]
@@ -20,21 +20,30 @@
 	- ray distance
 */
 
-
 void	set_textures(t_data *data)
 {
 	int	tab[2];
 
-	data->so_img = mlx_xpm_file_to_image(data->mlx, data->var->so, &tab[0], &tab[1]);
-	data->so_data = (int *)mlx_get_data_addr(data->so_img, &tab[0], &tab[0], &tab[0]);
-	data->we_img = mlx_xpm_file_to_image(data->mlx, data->var->we, &tab[0], &tab[1]);
-	data->we_data = (int *)mlx_get_data_addr(data->we_img, &tab[0], &tab[0], &tab[0]);
-	data->ea_img = mlx_xpm_file_to_image(data->mlx, data->var->ea, &tab[0], &tab[1]);
-	data->ea_data = (int *)mlx_get_data_addr(data->ea_img, &tab[0], &tab[0], &tab[0]);
-	data->no_img = mlx_xpm_file_to_image(data->mlx, data->var->no, &tab[0], &tab[1]);
-	data->no_data = (int *)mlx_get_data_addr(data->no_img, &tab[0], &tab[0], &tab[0]);
-	data->door_img = mlx_xpm_file_to_image(data->mlx, DOOR_TEXT, &tab[0], &tab[1]);
-	data->door_data = (int *)mlx_get_data_addr(data->door_img, &tab[0], &tab[0], &tab[0]);
+	data->so_img = mlx_xpm_file_to_image(data->mlx,
+			data->var->so, &tab[0], &tab[1]);
+	data->so_data = (int *)mlx_get_data_addr(data->so_img,
+			&tab[0], &tab[0], &tab[0]);
+	data->we_img = mlx_xpm_file_to_image(data->mlx,
+			data->var->we, &tab[0], &tab[1]);
+	data->we_data = (int *)mlx_get_data_addr(data->we_img,
+			&tab[0], &tab[0], &tab[0]);
+	data->ea_img = mlx_xpm_file_to_image(data->mlx,
+			data->var->ea, &tab[0], &tab[1]);
+	data->ea_data = (int *)mlx_get_data_addr(data->ea_img,
+			&tab[0], &tab[0], &tab[0]);
+	data->no_img = mlx_xpm_file_to_image(data->mlx,
+			data->var->no, &tab[0], &tab[1]);
+	data->no_data = (int *)mlx_get_data_addr(data->no_img,
+			&tab[0], &tab[0], &tab[0]);
+	data->door_img = mlx_xpm_file_to_image(data->mlx,
+			DOOR_TEXT, &tab[0], &tab[1]);
+	data->door_data = (int *)mlx_get_data_addr(data->door_img,
+			&tab[0], &tab[0], &tab[0]);
 }
 
 int	end_game(t_data *data)
@@ -69,7 +78,7 @@ int	game_render(t_data *data)
 	return (1);
 }
 
-static void set_data(t_data *data, t_map_requirements *var)
+static void	set_data(t_data *data, t_map_requirements *var)
 {
 	data->rays = 0;
 	data->scale = SCALE;
@@ -106,8 +115,8 @@ void	rendering(t_data *data, t_map_requirements *var)
 	if (MOUSE_MOVE)
 		mlx_mouse_hide();
 	mlx_hook(data->win, 17, 0, end_game, data);
-	mlx_hook(data->win, 3, (1L<<1), key_release, data);
-	mlx_hook(data->win, 2, (1L<<0), key_press, data);
+	mlx_hook(data->win, 3, (1L << 1), key_release, data);
+	mlx_hook(data->win, 2, (1L << 0), key_press, data);
 	mlx_loop_hook(data->mlx, &game_render, data);
-    mlx_loop(data->mlx);
+	mlx_loop(data->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:31:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 15:18:10 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/13 13:00:21 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	adjust_ray_y(t_data data, int y)
 {
-	if (y > data.map_height * data.minisize )
+	if (y > data.map_height * data.minisize)
 		y = data.map_height * data.minisize - 1;
 	if (y < 0)
 		y = 0;
@@ -38,7 +38,8 @@ int	intercept_wall(t_data *data, double x, double y, char sym)
 
 	floory = get_floor(y, *data);
 	floorx = get_floor(x, *data);
-	if (abs(floory) >= data->map_height || abs(floorx) >= (int)ft_strlen(data->map[floory]))
+	if (abs(floory) >= data->map_height
+		|| abs(floorx) >= (int)ft_strlen(data->map[floory]))
 		return (1);
 	hitpoint = data->map[abs(floory)][abs(floorx)];
 	if (hitpoint >= '1' && ft_isdigit(hitpoint))
