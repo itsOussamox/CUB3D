@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:33:35 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 13:57:40 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:42:28 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ void	draw_map(t_data *data)
 
 void	render_2d(t_data *data)
 {
+	data->alpha = 50;
 	data->minisize = floor(TILE_SIZE * data->scale);
 	draw_map(data);
 	put_player(data);
 	render_rays(data);
+	data->alpha = 0;
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 16:55:49 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:44:31 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@
 #define PLAYER_SIZE TILE_SIZE / 8
 #define PLAYER_COLOR 0x0000FF
 #define PLAYER_SPEED 4
+#define PLAYER_STRAFE 2
 #define ROTATION_SPEED 2 * (M_PI / 180)
 #define PLAYER_RAY 10
-#define	MOUSE_MOVE 1
+#define	MOUSE_MOVE 0
 //KEYHOOKS
 #define W 13
 #define S 1
@@ -49,10 +50,6 @@
 #define LEFT 123
 #define	M 46
 //TEXTURES
-#define SO_TEXT "./xpm/xpm/wall-2.xpm"
-#define NO_TEXT "./xpm/xpm/wall-4.xpm"
-#define EA_TEXT "./xpm/xpm/wall-3.xpm"
-#define WE_TEXT "./xpm/xpm/wall-1.xpm"
 #define DOOR_TEXT "./xpm/xpm/door.xpm"
 
 // Mouse data
@@ -130,7 +127,6 @@ typedef struct s_data
 	t_rays				*rays;
 	t_mouse				mouse;
 	double				scale;
-	//images
 	void				*so_img;
 	int					*so_data;
 	void				*no_img;
@@ -158,7 +154,6 @@ typedef struct s_data
 /* Drawing */
 void 	draw_rect(t_data *data, int rectx, int recty, int color);
 void	draw_player(t_data *data);
-void	ft_background_fill(t_data *data, int size, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *data, double beginX, double beginY, double endX, double endY);
 void	draw_wall(t_data *data, t_rect rect, int i);
@@ -202,6 +197,7 @@ int		intercept_wall(t_data *data, double x, double y, char sym);
 void	set_player(t_data *data, t_map_requirements *var);
 void	put_player(t_data *data);
 void	player_move(t_data *data);
+void	player_strafe(t_data *data);
 void	open_door(t_data *data);
 int		key_release(int key, t_data *data);
 int		key_press(int key, t_data *data);

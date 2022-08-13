@@ -6,7 +6,7 @@
 /*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 16:16:48 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:32:55 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	open_door(t_data *data)
 	i = data->numofrays / 2;
 	if (counter)
 		counter++;
-	if (counter == 250)
+	if (counter == 150)
 	{
 		data->map[y][x] = '2';
 		counter = 0;
@@ -45,11 +45,37 @@ void	render_angle(t_data *data)
 {
 	data->minisize = TILE_SIZE;
 	data->player.pa += data->player.turn_dir * ROTATION_SPEED;
-	data->player.pa = fmod(data->player.pa, (2 * M_PI));
+	data->player.pa = fmod(data->player.pa, (2 * (M_PI)));
 	if (data->player.pa < 0)
 		data->player.pa += 2 * M_PI;
 	if (data->player.pa == 0 || data->player.pa == M_PI)
 		data->player.pa += 0.00000001;
+}
+
+void	player_strafe(t_data *data)
+{
+	double	temp_angle;
+	double	newx;
+	double	newy;
+	int		x;
+	int		y;
+
+	if (data->player.strafe_dir == 0)
+		return ;
+	if (data->player.strafe_dir == -1)
+		temp_angle = data->player.pa - (M_PI_2);
+	else
+		temp_angle = data->player.pa + (M_PI_2);
+	newx =  data->player.x + (cos(temp_angle) * (PLAYER_STRAFE));
+	newy =  data->player.y + (sin(temp_angle) * (PLAYER_STRAFE));
+	x = floor(data->player.x) / data->minisize;
+    y = floor(newy) / data->minisize;
+    if (data->map[y][x] == '0' || data->map[y][x] == data->var->player_orientaition)
+	    data->player.y = newy;
+	y = floor(data->player.y) / data->minisize;
+    x = floor(newx) / data->minisize;
+    if (data->map[y][x] == '0'  || data->map[y][x] == data->var->player_orientaition)
+	    data->player.x = newx;
 }
 
 void	player_move(t_data *data)
@@ -99,7 +125,7 @@ int key_press(int key, t_data *data)
 	if (key == A)
 		data->player.strafe_dir = -1;
 	if (key == D)
-		data->player.strafe_dir = -1;
+		data->player.strafe_dir = 1;
 	if (key == LEFT)
 		data->player.turn_dir = -1;
 	if (key == RIGHT)
