@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:31:14 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/13 13:18:37 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/18 15:09:38 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ static void	set_player_angle(t_data *data, char pos)
 
 void	set_player(t_data *data, t_map_requirements *var)
 {
-	data->player.x = (var->x_player * data->minisize + data->minisize / 2);
-	data->player.y = ((var->y_player - 6)
+	//printf("%d,%d\n",var->x_player,var->y_player - 6);
+	data->player.x+= (var->x_player * data->minisize + data->minisize / 2);
+	data->player.y =((var->y_player - 6)
 			* data->minisize + data->minisize / 2);
+	//printf("%f,%f, %d\n" ,data->player.x, data->player.y, data->minisize);
 	set_player_angle(data, var->player_orientaition);
 }
 

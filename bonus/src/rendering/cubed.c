@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/13 13:28:10 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/19 11:42:22 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 	- ray distance
 */
 
-void	set_textures(t_data *data)
+void	*set_textures(t_data *data)
 {
 	int	tab[2];
 
+	if (check_file(data) == 1)
+		return (printf("Error:\ntexture file!\n"), exit(EXIT_FAILURE), NULL);
 	data->so_img = mlx_xpm_file_to_image(data->mlx,
 			data->var->so, &tab[0], &tab[1]);
 	data->so_data = (int *)mlx_get_data_addr(data->so_img,
@@ -44,6 +46,7 @@ void	set_textures(t_data *data)
 			DOOR_TEXT, &tab[0], &tab[1]);
 	data->door_data = (int *)mlx_get_data_addr(data->door_img,
 			&tab[0], &tab[0], &tab[0]);
+	return (NULL);
 }
 
 int	end_game(t_data *data)
@@ -80,9 +83,11 @@ int	game_render(t_data *data)
 
 static void	set_data(t_data *data, t_map_requirements *var)
 {
+	data->var = var;
+	data->mlx = mlx_init();
+	set_textures(data);
 	data->rays = 0;
 	data->scale = SCALE;
-	data->var = var;
 	data->alpha = 1;
 	data->map_height = var->height;
 	data->map_width = var->width;
@@ -98,15 +103,13 @@ static void	set_data(t_data *data, t_map_requirements *var)
 	data->c_color = var->c;
 	data->f_color = var->f;
 	set_player(data, var);
-    data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, data->window_width,
+	data->win = mlx_new_window(data->mlx, data->window_width,
 		data->window_height, "Cub3D");
 	data->img.mlx_img = mlx_new_image(data->mlx,
 		data->window_width, data->window_height);
 	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,
 		&data->img.bpp, &data->img.line_len, &data->img.endian);
 	data->img.line_len /= 4;
-	set_textures(data);
 }
 
 void	rendering(t_data *data, t_map_requirements *var)

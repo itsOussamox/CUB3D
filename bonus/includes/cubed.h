@@ -3,54 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/12 19:44:31 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/19 11:52:07 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBED_H
-#define CUBED_H
-#include "../mlx/mlx.h"
-#include "parsing.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <unistd.h>
-#include <limits.h>
+# define CUBED_H
+# include "../mlx/mlx.h"
+# include "parsing.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include <unistd.h>
+# include <limits.h>
 
 /* 2D COLORS */
-#define GROUND_COLOR 0x808080
-#define WALL_COLOR 0x212121
-#define	DOOR_COLOR 0x2121FF
+# define GROUND_COLOR 0x808080
+# define WALL_COLOR 0x212121
+# define DOOR_COLOR 0x2121FF
 /* WINDOW SETTINGS */
-#define FOV 60
-#define FOV_ANGLE FOV * (M_PI / 180)
-#define WSTRIP 1
-#define SCALE 0.25
-#define TILE_SIZE 32
-#define GRID 0
+# define FOV 60
+# define FOV_ANGLE FOV * (M_PI / 180)
+# define WSTRIP 1
+# define SCALE 0.25
+# define TILE_SIZE 32
+# define GRID 2
 //PLAYER SETTINGS
-#define PLAYER_SIZE TILE_SIZE / 8
-#define PLAYER_COLOR 0x0000FF
-#define PLAYER_SPEED 4
-#define PLAYER_STRAFE 2
-#define ROTATION_SPEED 2 * (M_PI / 180)
-#define PLAYER_RAY 10
-#define	MOUSE_MOVE 0
+# define PLAYER_SIZE TILE_SIZE / 8
+# define PLAYER_COLOR 0x0000FF
+# define PLAYER_SPEED 4
+# define PLAYER_STRAFE 2
+# define ROTATION_SPEED 2 * (M_PI / 180)
+# define PLAYER_RAY 10
+# define MOUSE_MOVE 0
 //KEYHOOKS
-#define W 13
-#define S 1
-#define A 0
-#define D 2
-#define E 14
-#define ESCAPE 53
-#define RIGHT 124
-#define LEFT 123
-#define	M 46
+# define W 13
+# define S 1
+# define A 0
+# define D 2
+# define E 14
+# define ESCAPE 53
+# define RIGHT 124
+# define LEFT 123
+# define M 46
 //TEXTURES
-#define DOOR_TEXT "./xpm/xpm/door.xpm"
+# define DOOR_TEXT "./xpm/xpm/door.xpm"
 
 // Mouse data
 typedef struct s_mouse
@@ -84,7 +84,7 @@ typedef struct s_ray
 	double	xstep;
 	double	ystep;
 	double	ra;
-}	t_ray;
+}			t_ray;
 
 typedef struct s_rays
 {
@@ -94,7 +94,7 @@ typedef struct s_rays
 	char	sym;
 	char	tab_hit;
 	double	angle;
-}	t_rays;
+}			t_rays;
 // Image to draw on
 typedef struct s_img
 {
@@ -103,19 +103,19 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
-}	t_img;
+}			t_img;
 
 // Player's informations
 typedef struct s_player
 {
 	double		x;
 	double		y;
-	int		move_dir;
-	int		turn_dir;
-	int		strafe_dir;
-	int		open_door;
-	double	pa;
-}	t_player;
+	int			move_dir;
+	int			turn_dir;
+	int			strafe_dir;
+	int			open_door;
+	double		pa;
+}				t_player;
 
 // mlx and map's data
 typedef struct s_data
@@ -140,19 +140,19 @@ typedef struct s_data
 	int					minisize;
 	int					numofrays;
 	int					alpha;
-    void				*mlx;
-    void				*win;
+	void				*mlx;
+	void				*win;
 	int					window_height;
 	int					window_width;
-	int 				map_height;
-	int 				map_width;
+	int					map_height;
+	int					map_width;
 	int					f_color;
 	int					c_color;
-	char 				**map;
-}   t_data;
+	char				**map;
+}						t_data;
 
 /* Drawing */
-void 	draw_rect(t_data *data, int rectx, int recty, int color);
+void	draw_rect(t_data *data, int rectx, int recty, int color);
 void	draw_player(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_line(t_data *data, double beginX, double beginY, double endX, double endY);
@@ -175,7 +175,8 @@ int		is_player(char c);
 int		end_game(t_data *data);
 t_rect	get_rect(int x, int y, int dx, int dy);
 void	ft_playsound(int sound);
-
+int		check_file(t_data *data);
+int		check_file2(t_data *data);
 
 /* Ray Casting */
 int		game_render(t_data *data);
@@ -210,7 +211,5 @@ int		get_south_texture(t_data *data, int xoff, int yoff);
 int		get_east_texture(t_data *data, int xoff, int yoff);
 int		get_west_texture(t_data *data, int xoff, int yoff);
 int		get_north_texture(t_data *data, int xoff, int yoff);
-
-
 
 #endif

@@ -6,7 +6,7 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/13 13:11:17 by aabdou           ###   ########.fr        #
+#    Updated: 2022/08/19 11:44:31 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 RM = rm -f
 
@@ -43,29 +43,32 @@ SRCS =	main.c\
 		./src/rendering/mouse.c\
 		./src/rendering/colors.c\
 		./src/rendering/sounds.c\
+		./src/rendering/utils.c
 
 LIB =	./includes/parsing.h\
 		./includes/cubed.h\
 		./mlx/mlx.h
 
-MLX_LIB = ./mlx
+MLX_LIB = ./mlx/
 
 MLX_FLAG = -L./mlx -lmlx -framework openGL -framework AppKit
 
 OBJT = $(SRCS:.c=.o)
 
-$(NAME): $(OBJT) LIBFT
-	@make -C $(MLX_LIB)
+all : $(NAME)
+
+$(NAME): $(OBJT) LIBFT MLX
 	$(CC) $(FLAGS) $(MLX_FLAG) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
 
 %.o : %.c $(LIB)
 	$(CC) $(FLAGS) -o $@ -c $<
 
-all : $(NAME)
 
 LIBFT :
 	@make -C ./utils/libft
 
+MLX :
+	@make -C $(MLX_LIB)
 
 clean:
 	$(RM) $(OBJT)
