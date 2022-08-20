@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:32:58 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/13 13:08:40 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:37:35 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	cast_rays(t_data *data)
 	int		i;
 
 	data->numofrays = (data->window_width / WSTRIP);
-	rayangle = data->player.pa - (FOV_ANGLE / 2);
+	rayangle = data->player.pa - (data->fov_angel / 2);
 	data->rays = malloc(data->numofrays * sizeof(t_rays));
 	if (!data->rays)
 		exit(1);
@@ -134,7 +134,7 @@ void	cast_rays(t_data *data)
 		if (rayangle == 0 || rayangle == M_PI)
 			rayangle += 0.00000001;
 		ray_cast(data, rayangle, i);
-		rayangle += (FOV_ANGLE / data->numofrays);
+		rayangle += (data->fov_angel / data->numofrays);
 		i++;
 	}
 }

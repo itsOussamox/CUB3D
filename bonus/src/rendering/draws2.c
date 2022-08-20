@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:42:17 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/13 13:20:13 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/19 15:19:44 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,11 @@ void	draw_wall(t_data *data, t_rect rect, int idx)
 	max = rect.y + rect.dy;
 	i = rect.y;
 	if (i < 0)
-		i = 0;
-	if (max >= data->window_height)
-		max = data->window_height;
-	if (data->rays[idx].sym == 'V')
-		x_offset = (int)data->rays[idx].wallhity % TILE_SIZE;
-	else
-		x_offset = (int)data->rays[idx].wallhitx % TILE_SIZE;
-	while (i < max)
+		i = -1;
+	init_offset(data, &x_offset, idx, &max);
+	while (++i < max)
 	{
-		y_offset = (i - rect.y)  * ((double)TILE_SIZE / rect.dy);
+		y_offset = (i - rect.y) * ((double)TILE_SIZE / rect.dy);
 		if (y_offset > TILE_SIZE)
 			y_offset = TILE_SIZE;
 		j = rect.x;
@@ -104,6 +99,5 @@ void	draw_wall(t_data *data, t_rect rect, int idx)
 					get_wall_color(data, idx, x_offset, y_offset));
 			j++;
 		}
-		i++;
 	}
 }

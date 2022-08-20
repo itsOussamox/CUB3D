@@ -1,14 +1,13 @@
-NO ./xpm/xpm/walle-4.xpm
+NO ./xpm/xpm/blue-wall.xpm
 
-SO ./xpm/xpm/walle-2.xpm
+SO ./xpm/xpm/grey-slab-wall.xpm
 
-WE ./xpm/xpm/wall-3.xpm
+WE ./xpm/xpm/red-wall.xpm
 
-EA ./xpm/xpm/wall-1.xpm
+EA ./xpm/xpm/banner.xpm
 
 
 F 185, 180, 171
-
 
 
 C 135,206,250

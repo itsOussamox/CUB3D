@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:20:59 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/18 13:39:07 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:58:50 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ void	open_door(t_data *data)
 	data->player.open_door = 0;
 }
 
-//if player turns update the angle that he's facing
 void	render_angle(t_data *data)
 {
 	data->minisize = TILE_SIZE;
-	data->player.pa += data->player.turn_dir * ROTATION_SPEED;
+	data->player.pa += data->player.turn_dir * data->rotation_s;
 	data->player.pa = fmod(data->player.pa, (2 * (M_PI)));
-	if (data->player.pa < 0) //keep the player angle in the range of 0 to 2*pie
+	if (data->player.pa < 0)
 		data->player.pa += 2 * M_PI;
 	if (data->player.pa == 0 || data->player.pa == M_PI)
 		data->player.pa += 0.00000001;

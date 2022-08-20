@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/19 11:52:07 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/20 13:16:09 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,16 @@
 # define DOOR_COLOR 0x2121FF
 /* WINDOW SETTINGS */
 # define FOV 60
-# define FOV_ANGLE FOV * (M_PI / 180)
 # define WSTRIP 1
 # define SCALE 0.25
 # define TILE_SIZE 32
-# define GRID 2
+# define GRID 0
 //PLAYER SETTINGS
-# define PLAYER_SIZE TILE_SIZE / 8
 # define PLAYER_COLOR 0x0000FF
 # define PLAYER_SPEED 4
 # define PLAYER_STRAFE 2
-# define ROTATION_SPEED 2 * (M_PI / 180)
 # define PLAYER_RAY 10
-# define MOUSE_MOVE 0
+# define MOUSE_MOVE 1
 //KEYHOOKS
 # define W 13
 # define S 1
@@ -127,6 +124,9 @@ typedef struct s_data
 	t_rays				*rays;
 	t_mouse				mouse;
 	double				scale;
+	double				player_size;
+	double				fov_angel;
+	double				rotation_s;
 	void				*so_img;
 	int					*so_data;
 	void				*no_img;
@@ -155,7 +155,7 @@ typedef struct s_data
 void	draw_rect(t_data *data, int rectx, int recty, int color);
 void	draw_player(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_line(t_data *data, double beginX, double beginY, double endX, double endY);
+void	draw_line(t_data *data, double beginX, double beginY, double *tab);
 void	draw_wall(t_data *data, t_rect rect, int i);
 void	draw_top(t_data *data, t_rect a);
 void	draw_bot(t_data *data, t_rect a);
@@ -163,7 +163,7 @@ void	draw_cursor(t_data *data);
 
 /* Rendring */
 void	render_2d(t_data *data);
-void	render_3d(t_data *data);
+void	render_3d(t_data *data, int i);
 void	draw_map(t_data *data);
 void	render_angle(t_data *data);
 void	render_rays(t_data *data);
@@ -177,6 +177,8 @@ t_rect	get_rect(int x, int y, int dx, int dy);
 void	ft_playsound(int sound);
 int		check_file(t_data *data);
 int		check_file2(t_data *data);
+void	init_offset(t_data *data, int *x_offset, int idx, int *max);
+void	set_data2(t_data *data, t_map_requirements *var);
 
 /* Ray Casting */
 int		game_render(t_data *data);

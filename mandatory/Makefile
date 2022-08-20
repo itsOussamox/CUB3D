@@ -6,7 +6,7 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/12 17:15:45 by aabdou           ###   ########.fr        #
+#    Updated: 2022/08/20 13:33:35 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 RM = rm -f
 
@@ -34,12 +34,14 @@ SRCS =	main.c\
 		./src/rendering/draws2.c\
 		./src/rendering/player_data.c\
 		./src/rendering/player_movements.c\
+		./src/rendering/player_movmentes2.c\
 		./src/rendering/ray_cast.c\
 		./src/rendering/ray_utils.c\
 		./src/rendering/ray_utils2.c\
 		./src/rendering/render_utils.c\
 		./src/rendering/render_utils2.c\
-		./src/rendering/colors.c
+		./src/rendering/colors.c\
+		./src/rendering/utils.c
 
 LIB =	./includes/parsing.h\
 		./includes/cubed.h\
@@ -51,6 +53,8 @@ MLX_FLAG = -L./mlx -lmlx -framework openGL -framework AppKit
 
 OBJT = $(SRCS:.c=.o)
 
+all : $(NAME)
+
 $(NAME): $(OBJT) LIBFT
 	@make -C $(MLX_LIB)
 	$(CC) $(FLAGS) $(MLX_FLAG) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
@@ -58,7 +62,6 @@ $(NAME): $(OBJT) LIBFT
 %.o : %.c $(LIB)
 	$(CC) $(FLAGS) -o $@ -c $<
 
-all : $(NAME)
 
 LIBFT :
 	@make -C ./utils/libft

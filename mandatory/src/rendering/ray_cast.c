@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:32:58 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/10 15:28:36 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:37:35 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 
-double	get_wall_intercept(t_data *data, double xintercept, double yintercept, char sym)
+double	get_wall_intercept(t_data *data, double x, double y, char sym)
 {
 	double	nextx;
 	double	nexty;
 	double	savex;
 	double	savey;
 
-	nextx = xintercept;
-	nexty = yintercept;
+	nextx = x;
+	nexty = y;
 	if (ray_out_of_map(data, nextx, nexty))
 		return (LONG_MAX);
-	while ((nextx > 0 || (int)nextx < data->map_width * data->minisize) &&
-	(nexty > 0 || (int)nexty <= data->map_height * data->minisize))
+	while ((nextx > 0 || (int)nextx < data->map_width * data->minisize)
+		&& (nexty > 0 || (int)nexty <= data->map_height * data->minisize))
 	{
 		savex = nextx;
 		savey = nexty;
 		if (intercept_wall(data, nextx, nexty, sym))
-			break;
+			break ;
 		nextx += data->ray.xstep;
 		nexty += data->ray.ystep;
 		if (ray_out_of_map(data, nextx, nexty))
@@ -52,7 +52,8 @@ static double	horizontal_intersect(t_data *data, double rayangle)
 		yintercept += data->minisize;
 	if (ray_facingup(rayangle))
 		yintercept -= 0.0001;
-	xintercept = data->player.x + ((yintercept - data->player.y) / tan(rayangle));
+	xintercept = data->player.x + ((yintercept - data->player.y)
+			/ tan(rayangle));
 	data->ray.ystep = data->minisize;
 	if (ray_facingup(rayangle))
 		data->ray.ystep *= -1;
@@ -75,7 +76,8 @@ static double	vertical_intersect(t_data *data, double rayangle)
 		xintercept += data->minisize;
 	if (ray_facingleft(rayangle))
 		xintercept -= 0.0001;
-	yintercept = data->player.y + ((xintercept - data->player.x) * tan(rayangle));
+	yintercept = data->player.y + ((xintercept - data->player.x)
+			* tan(rayangle));
 	data->ray.xstep = data->minisize;
 	if (ray_facingleft(rayangle))
 		data->ray.xstep *= -1;
@@ -89,7 +91,7 @@ static double	vertical_intersect(t_data *data, double rayangle)
 
 void	ray_cast(t_data *data, double rayangle, int i)
 {
-	double	walldistancev;	
+	double	walldistancev;
 	double	walldistanceh;
 
 	walldistancev = vertical_intersect(data, rayangle);
@@ -109,7 +111,8 @@ void	ray_cast(t_data *data, double rayangle, int i)
 		data->rays[i].tab_hit = data->ray.hitpointv;
 	}
 	data->rays[i].angle = rayangle;
-	data->rays[i].distance = hypot(data->rays[i].wallhity - data->player.y, data->rays[i].wallhitx - data->player.x);
+	data->rays[i].distance = hypot(data->rays[i].wallhity
+			- data->player.y, data->rays[i].wallhitx - data->player.x);
 }
 
 void	cast_rays(t_data *data)
@@ -118,7 +121,7 @@ void	cast_rays(t_data *data)
 	int		i;
 
 	data->numofrays = (data->window_width / WSTRIP);
-	rayangle = data->player.pa - (FOV_ANGLE / 2);
+	rayangle = data->player.pa - (data->fov_angel / 2);
 	data->rays = malloc(data->numofrays * sizeof(t_rays));
 	if (!data->rays)
 		exit(1);
@@ -131,7 +134,7 @@ void	cast_rays(t_data *data)
 		if (rayangle == 0 || rayangle == M_PI)
 			rayangle += 0.00000001;
 		ray_cast(data, rayangle, i);
-		rayangle += (FOV_ANGLE / data->numofrays);
+		rayangle += (data->fov_angel / data->numofrays);
 		i++;
 	}
 }

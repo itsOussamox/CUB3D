@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/09 19:41:45 by obouadel         ###   ########.fr       */
+/*   Updated: 2022/08/19 11:45:33 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ void	free_2d(char **var);
 char	**clear_tabs_and_spaces(char *str, char *charset);
 void	get_map_height_and_width(int i, t_map_requirements *var);
 void	free_file_path(t_map_requirements *var);
-
 
 #endif

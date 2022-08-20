@@ -6,7 +6,7 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/19 11:44:31 by aabdou           ###   ########.fr        #
+#    Updated: 2022/08/19 17:27:35 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ LIB =	./includes/parsing.h\
 		./includes/cubed.h\
 		./mlx/mlx.h
 
-MLX_LIB = ./mlx/
+MLX_LIB = ./mlx
 
 MLX_FLAG = -L./mlx -lmlx -framework openGL -framework AppKit
 
@@ -57,7 +57,8 @@ OBJT = $(SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME): $(OBJT) LIBFT MLX
+$(NAME): $(OBJT) LIBFT
+	@make -C $(MLX_LIB)
 	$(CC) $(FLAGS) $(MLX_FLAG) $(OBJT)  ./utils/libft/libft.a -o $(NAME)
 
 %.o : %.c $(LIB)
@@ -67,8 +68,6 @@ $(NAME): $(OBJT) LIBFT MLX
 LIBFT :
 	@make -C ./utils/libft
 
-MLX :
-	@make -C $(MLX_LIB)
 
 clean:
 	$(RM) $(OBJT)

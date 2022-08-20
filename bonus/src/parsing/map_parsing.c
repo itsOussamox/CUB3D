@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/13 13:29:54 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/19 17:18:34 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	check_map_chars(char **map, t_map_requirements *var)
 			nb_of_players += log_player_data(map[i][j], var, i, j);
 			if (map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'E'
 				&& map[i][j] != 'W' && map[i][j] != ' '
-				&& map[i][j] != '\t' && map[i][j] != '1'
-				&& map[i][j] != '0' && map[i][j] != '2')
+				&& map[i][j] != '1' && map[i][j] != '0'
+				&& map[i][j] != '2')
 			{
 				ft_putendl_fd("Error:\nunrecognized element in map!", 2);
 				return (1);

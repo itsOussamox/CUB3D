@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   player_movmentes2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/10 18:02:18 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/19 17:24:39 by aabdou           ###   ########.fr       */
+/*   Created: 2022/08/13 13:11:25 by aabdou            #+#    #+#             */
+/*   Updated: 2022/08/20 13:28:41 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 
-void	get_mouse_data(t_data *data)
+int	key_press(int key, t_data *data)
 {
-	int	x;
-	int	y;
-
-	if (!MOUSE_MOVE)
-		return ;
-	mlx_mouse_get_pos(data->win, &x, &y);
-	if (x > data->mouse.mid_x)
-		data->player.turn_dir = 1;
-	if (x < data->mouse.mid_x)
+	if (key == W)
+		data->player.move_dir = 1;
+	if (key == S)
+		data->player.move_dir = -1;
+	if (key == A)
+		data->player.strafe_dir = -1;
+	if (key == D)
+		data->player.strafe_dir = 1;
+	if (key == LEFT)
 		data->player.turn_dir = -1;
-	if (x == data->mouse.mid_x)
-		data->player.turn_dir = 0;
-	mlx_mouse_move(data->win, data->window_width / 2, data->window_height / 2);
+	if (key == RIGHT)
+		data->player.turn_dir = 1;
+	if (key == M)
+	{
+		if (data->scale == 1)
+			data->scale = SCALE;
+		else
+			data->scale = 1;
+	}
+	if (key == ESCAPE)
+		end_game(data);
+	return (1);
 }

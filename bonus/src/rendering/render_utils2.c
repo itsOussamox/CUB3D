@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:45:13 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/13 12:54:45 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/19 15:59:03 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,37 @@
 
 void	render_rays(t_data *data)
 {
-	int	i;
+	int		i;
+	double	tab[2];
 
 	i = 0;
 	while (i < data->numofrays)
 	{
+		tab[0] = data->rays[i].wallhitx * data->scale;
+		tab[1] = data->rays[i].wallhity * data->scale;
 		draw_line(data, (data->player.x * data->scale),
-			(data->player.y * data->scale),
-			(data->rays[i].wallhitx * data->scale),
-			(data->rays[i].wallhity * data->scale));
+			(data->player.y * data->scale), tab);
 		i++;
 	}
 }
 
-void	render_3d(t_data *data)
+void	render_3d(t_data *data, int i)
 {
-	int		i;
 	double	raydistance;
 	double	distance_pp;
 	double	wallstrip_height;
 	t_rect	rect;
 
-	i = 0 ;
+	i = -1 ;
 	mlx_clear_window(data->mlx, data->win);
-	while (i < data->numofrays)
+	while (++i < data->numofrays)
 	{
-		raydistance = data->rays[i].distance * cos(data->rays[i].angle - data->player.pa);
-		distance_pp = (data->window_width / 2) / fabs(tan(FOV_ANGLE / 2));
+		raydistance = data->rays[i].distance
+			* cos(data->rays[i].angle - data->player.pa);
+		distance_pp = (data->window_width / 2) / fabs(tan(data->fov_angel / 2));
 		wallstrip_height = (TILE_SIZE / raydistance) * distance_pp;
 		rect = get_rect(i, (data->window_height / 2)
-		- (wallstrip_height / 2), 1, wallstrip_height);
+				- (wallstrip_height / 2), 1, wallstrip_height);
 		draw_top(data, rect);
 		data->alpha = raydistance / 6;
 		if (data->alpha > 250)
@@ -51,7 +52,6 @@ void	render_3d(t_data *data)
 		draw_wall(data, rect, i);
 		draw_bot(data, rect);
 		data->alpha = 0;
-		i++;
 	}
 	draw_cursor(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.mlx_img, 0, 0);
