@@ -6,13 +6,13 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/19 17:27:35 by aabdou           ###   ########.fr        #
+#    Updated: 2022/08/21 19:50:40 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+NAME = cub3D_bonus
 
-CC = cc
+CC = gcc
 
 FLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
@@ -43,7 +43,8 @@ SRCS =	main.c\
 		./src/rendering/mouse.c\
 		./src/rendering/colors.c\
 		./src/rendering/sounds.c\
-		./src/rendering/utils.c
+		./src/rendering/utils.c\
+		./src/parsing/utils2.c
 
 LIB =	./includes/parsing.h\
 		./includes/cubed.h\

@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:47:10 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/19 15:30:50 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:35:22 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_tab(t_map_requirements *var, char **tab, int index)
 
 int	check_texture(t_map_requirements *var, char **tab)
 {
-	if (ft_strncmp(".xpm", tab[1] + (ft_strlen(tab[1]) - 4), 4) != 0
+	if (!tab[1] || ft_strncmp(".xpm", tab[1] + (ft_strlen(tab[1]) - 4), 4) != 0
 		|| tab[2] != NULL)
 		return (ft_putendl_fd("Error:\nwrong texture file type!", 2), 1);
 	if (fill_texture(var, tab) == 1)

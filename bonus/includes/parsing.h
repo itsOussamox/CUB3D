@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:41:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/19 11:45:33 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/21 19:49:30 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ void	free_2d(char **var);
 char	**clear_tabs_and_spaces(char *str, char *charset);
 void	get_map_height_and_width(int i, t_map_requirements *var);
 void	free_file_path(t_map_requirements *var);
+int		loop_through_string(char *str);
+void	check_comma(t_map_requirements *var, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/19 15:39:59 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/21 16:53:12 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	*set_textures(t_data *data)
 
 	if (check_file(data) == 1)
 		return (printf("Error:\ntexture file!\n"), exit(EXIT_FAILURE), NULL);
+	data->mlx = mlx_init();
 	data->so_img = mlx_xpm_file_to_image(data->mlx,
 			data->var->so, &tab[0], &tab[1]);
 	data->so_data = (int *)mlx_get_data_addr(data->so_img,
@@ -76,7 +77,6 @@ int	game_render(t_data *data)
 static void	set_data(t_data *data, t_map_requirements *var)
 {
 	data->var = var;
-	data->mlx = mlx_init();
 	set_textures(data);
 	data->rays = 0;
 	data->scale = SCALE;

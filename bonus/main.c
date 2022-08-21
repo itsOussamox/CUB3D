@@ -6,12 +6,16 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 10:43:30 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/20 13:46:28 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:21:21 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/parsing.h"
 #include "./includes/cubed.h"
+
+//handel if texture file is missing
+//handel ',' in C & F
+//handel if xpm file is tampered with
 
 void	get_map_height_and_width(int i, t_map_requirements *var)
 {

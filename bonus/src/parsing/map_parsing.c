@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 15:37:42 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/19 17:18:34 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/21 19:47:55 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	check_non_map_elm_for_error(t_map_requirements **var)
 	i = -1;
 	while ((*var)->map[++i])
 	{
+		check_comma((*var), (*var)->map[i]);
 		tab = clear_tabs_and_spaces((*var)->map[i], " \t");
 		return_value = check_tab((*var), tab, i);
 		if (return_value == 2)

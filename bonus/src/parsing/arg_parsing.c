@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:53:27 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/08 13:54:26 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/21 16:44:17 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	open_file(int *fd, char *file_name)
 {
-	*fd = open(file_name, O_RDONLY);
+	*fd = open(file_name, O_RDWR);
 	if (*fd < 0)
 	{
 		ft_putendl_fd("Error:\ncant open file!", 2);
