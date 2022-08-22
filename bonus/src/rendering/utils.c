@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 11:35:40 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/21 18:29:02 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/22 16:04:52 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,12 @@ void	set_data2(t_data *data, t_map_requirements *var)
 	set_player(data, var);
 	data->win = mlx_new_window(data->mlx, data->window_width,
 			data->window_height, "Cub3D");
+	if (data->win == NULL)
+		ft_free(data, "Cant open window!");
 	data->img.mlx_img = mlx_new_image(data->mlx,
 			data->window_width, data->window_height);
+	if (data->img.mlx_img == NULL)
+		ft_free(data, "Cant open window!");
 	data->img.addr = (int *)mlx_get_data_addr(data->img.mlx_img,
 			&data->img.bpp, &data->img.line_len, &data->img.endian);
 	data->img.line_len /= 4;
