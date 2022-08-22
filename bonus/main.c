@@ -13,10 +13,6 @@
 #include "./includes/parsing.h"
 #include "./includes/cubed.h"
 
-//handel if texture file is missing
-//handel ',' in C & F
-//handel if xpm file is tampered with
-
 void	get_map_height_and_width(int i, t_map_requirements *var)
 {
 	int	width;
