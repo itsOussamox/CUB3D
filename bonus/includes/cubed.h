@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:26:16 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/20 13:16:09 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/22 13:58:49 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ int		check_file(t_data *data);
 int		check_file2(t_data *data);
 void	init_offset(t_data *data, int *x_offset, int idx, int *max);
 void	set_data2(t_data *data, t_map_requirements *var);
+void	set_textures2(t_data *data);
+void	ft_free(t_data *data, char *str);
 
 /* Ray Casting */
 int		game_render(t_data *data);

@@ -6,7 +6,7 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 20:35:45 by obouadel          #+#    #+#              #
-#    Updated: 2022/08/21 20:36:59 by aabdou           ###   ########.fr        #
+#    Updated: 2022/08/22 14:02:34 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS =	main.c\
 		./src/rendering/render_utils2.c\
 		./src/rendering/colors.c\
 		./src/rendering/utils.c\
+		./src/rendering/utils2.c\
 		./src/parsing/utils2.c
 
 LIB =	./includes/parsing.h\

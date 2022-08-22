@@ -6,40 +6,35 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:24:54 by obouadel          #+#    #+#             */
-/*   Updated: 2022/08/21 16:53:12 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/22 13:58:25 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cubed.h"
 
-void	*set_textures(t_data *data)
+void	set_textures(t_data *data)
 {
 	int	tab[2];
 
 	if (check_file(data) == 1)
-		return (printf("Error:\ntexture file!\n"), exit(EXIT_FAILURE), NULL);
+		ft_free(data, "texture files missing!");
 	data->mlx = mlx_init();
 	data->so_img = mlx_xpm_file_to_image(data->mlx,
 			data->var->so, &tab[0], &tab[1]);
+	if (data->so_img == NULL)
+		ft_free(data, "SO wall texture");
 	data->so_data = (int *)mlx_get_data_addr(data->so_img,
 			&tab[0], &tab[0], &tab[0]);
 	data->we_img = mlx_xpm_file_to_image(data->mlx,
 			data->var->we, &tab[0], &tab[1]);
+	if (data->we_img == NULL)
+		ft_free(data, "WE wall texture");
 	data->we_data = (int *)mlx_get_data_addr(data->we_img,
 			&tab[0], &tab[0], &tab[0]);
 	data->ea_img = mlx_xpm_file_to_image(data->mlx,
 			data->var->ea, &tab[0], &tab[1]);
-	data->ea_data = (int *)mlx_get_data_addr(data->ea_img,
-			&tab[0], &tab[0], &tab[0]);
-	data->no_img = mlx_xpm_file_to_image(data->mlx,
-			data->var->no, &tab[0], &tab[1]);
-	data->no_data = (int *)mlx_get_data_addr(data->no_img,
-			&tab[0], &tab[0], &tab[0]);
-	data->door_img = mlx_xpm_file_to_image(data->mlx,
-			DOOR_TEXT, &tab[0], &tab[1]);
-	data->door_data = (int *)mlx_get_data_addr(data->door_img,
-			&tab[0], &tab[0], &tab[0]);
-	return (NULL);
+	set_textures2(data);
+	return ;
 }
 
 int	end_game(t_data *data)
