@@ -3,14 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:47:10 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/21 18:36:59 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/24 16:18:55 by obouadel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+static char *ft_get_map(char *str)
+{
+	int	i;
+	int	requirements;
+
+	i = 0;
+	requirements = 0;
+	while (str[i] && requirements != 6)
+	{
+		if (str[i] == 'N' && str[i + 1] == 'O')
+			requirements++;
+		if (str[i] == 'S' && str[i + 1] == 'O')
+			requirements++;
+		if (str[i] == 'W' && str[i + 1] == 'E')
+			requirements++;
+		if (str[i] == 'E' && str[i + 1] == 'A')
+			requirements++;
+		if (str[i] == 'F' && str[i + 1] == ' ')
+			requirements++;
+		if (str[i] == 'C' && str[i + 1] == ' ')
+			requirements++;
+		i++;
+	}
+	while (str[i] != '\n')
+		i++;
+	while (str[i] == '\n')
+		i++;
+	return (&str[i]);
+}
+
+static int	inspect_map(char *str)
+{
+	char	*tab;
+	int		i;
+
+	tab = ft_get_map(str);
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i] == '\n' && tab[i + 1] == '\n')
+		{
+			while (tab[i] != '\n' && tab[i])
+				i++;
+			if (tab[i] != '\0')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 char	**fill_map(int file_dicriptor)
 {
@@ -32,6 +83,11 @@ char	**fill_map(int file_dicriptor)
 	if (all_lines[0] == '\0')
 	{
 		ft_putendl_fd("Error:\ndidnt read map!", 2);
+		exit(EXIT_FAILURE);
+	}
+	if (inspect_map(all_lines))
+	{
+		ft_putendl_fd("Error:\nnewline on map", 2);
 		exit(EXIT_FAILURE);
 	}
 	res = ft_split(all_lines, '\n');
